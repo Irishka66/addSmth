@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { AddingRoutingModule } from './adding-routing.module';
 import { MainComponent } from './main/main.component';
 import { ListComponent } from './list/list.component';
+import { ContainerComponent } from './container/container.component';
+import { ExitComponent } from './exit/exit.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import { ListComponent } from './list/list.component';
   ],
   providers: [
   ],
-  declarations: [MainComponent, ListComponent]
+  declarations: [MainComponent, ListComponent, ContainerComponent, ExitComponent]
 })
 export class AddingModule { }
