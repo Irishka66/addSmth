@@ -20,12 +20,17 @@ export class MainComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    if (JSON.parse(localStorage.getItem('records')) !== null) {
+      this.dataService.arrAddedText = JSON.parse(localStorage.getItem('records'));
+      this.arrAddedText = this.dataService.arrAddedText;
+    }
   }
 
   add() {
     this.dataService.arrAddedText.push(this.addedText);
     this.arrAddedText = this.dataService.arrAddedText;
     this.addedText = '';
+    this.dataService.saveLocalRecords();
   }
 
   //this function is emmited from child: list component

@@ -1,6 +1,6 @@
-<p>
-  list works!
-</p>
+<!--<p>-->
+  <!--list works!-->
+<!--</p>-->
 
 <ul>
   <li *ngFor="let record of records, let i = index">
@@ -10,10 +10,23 @@
         <!--we can get some value in parent from like()-->
         <button class="btn btn-outline-secondary" type="button" (click)="like(23)">Like</button>
         <button class="btn btn-outline-secondary" type="button" (click)="edit(i)">Edit</button>
-        <button class="btn btn-outline-secondary" type="button" (click)="delete(i)">Delete</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="done(i)">Done</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="deleteRecord(i)">Delete</button>
       </div>
     </div>
   </li>
 </ul>
 
+<div class="done" *ngIf="dataService.arrDoneRecords[0]">Done:</div>
+
+<ul>
+  <li *ngFor="let doneRecord of dataService.arrDoneRecords, let i = index">
+    <div class="input-group mb-3">
+      <div class="form-control">{{doneRecord}}</div>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="deleteDoneRecord(i)">Delete</button>
+      </div>
+    </div>
+  </li>
+</ul>
 

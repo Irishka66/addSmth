@@ -21,12 +21,28 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.iFromEdit = -1;
+    if (JSON.parse(localStorage.getItem('doneRecords')) !== null) {
+      this.dataService.arrDoneRecords = JSON.parse(localStorage.getItem('doneRecords'));
+    }
   }
 
-  delete(i) {
-    this.dataService.arrAddedText.splice(i, 1);
-    // console.log(this.dataService.arrAddedText);
+  done(i) {
+    let doneRecord = this.dataService.arrAddedText.splice(i, 1);
     this.iFromEdit = -1;
+    this.dataService.saveLocalRecords();
+
+    this.dataService.arrDoneRecords.push(doneRecord[0]);
+    this.dataService.saveLocalDoneRecords();
+  }
+
+  deleteRecord(i) {
+    this.dataService.arrAddedText.splice(i, 1);
+    this.dataService.saveLocalRecords();
+  }
+
+  deleteDoneRecord(i) {
+    this.dataService.arrDoneRecords.splice(i, 1);
+    this.dataService.saveLocalDoneRecords();
   }
 
   // we should edit only one record that we choose, so the attribute 'contenteditable' will be true only when iFromEdit == i in li in template
@@ -38,6 +54,7 @@ export class ListComponent implements OnInit {
     let editedRecord = document.getElementsByClassName("editable")['0'].innerText;
     this.dataService.arrAddedText.splice(i, 1, editedRecord);
     this.iFromEdit = -1;
+    this.dataService.saveLocalRecords();
   }
 
 }
