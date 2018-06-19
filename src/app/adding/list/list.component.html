@@ -1,0 +1,19 @@
+<p>
+  list works!
+</p>
+
+<ul>
+  <li *ngFor="let record of records, let i = index">
+    <div class="input-group mb-3">
+      <div class="form-control" [ngClass]="{editable: i==iFromEdit}" [attr.contenteditable]="i==iFromEdit" (blur)="blurFromRecord(i)">{{record}}</div>
+      <div class="input-group-append">
+        <!--we can get some value in parent from like()-->
+        <button class="btn btn-outline-secondary" type="button" (click)="like(23)">Like</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="edit(i)">Edit</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="delete(i)">Delete</button>
+      </div>
+    </div>
+  </li>
+</ul>
+
+

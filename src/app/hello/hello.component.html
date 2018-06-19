@@ -1,0 +1,15 @@
+<p>
+  hello works!
+</p>
+
+
+<form>
+  <div class="form-group">
+    <label for="exampleInput">Print {{neededCode}}, please</label>
+    <input type="text" class="form-control" id="exampleInput" name="code" placeholder="" [(ngModel)]="code" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+</form>
+
+<!--<button (click)="submit()">click</button>-->

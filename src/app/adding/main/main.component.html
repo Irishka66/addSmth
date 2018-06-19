@@ -1,0 +1,19 @@
+<p>
+  main works!
+</p>
+
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="write smth" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="addedText" name="addedText">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" (click)="add()">Add</button>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary">
+  Likes <span class="badge badge-light">{{clicks}}</span>
+</button>
+
+<!--records will go to child as property, printLikes will go from child as event-->
+<app-list [records]="arrAddedText" (printLikes)="printLikes($event)"></app-list>
+
+
