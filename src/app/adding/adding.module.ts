@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AddingRoutingModule } from './adding-routing.module';
@@ -13,7 +14,8 @@ import { ExitComponent } from './exit/exit.component';
   imports: [
     CommonModule,
     AddingRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
   ],
