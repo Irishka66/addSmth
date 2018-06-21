@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { ListComponent } from './list/list.component';
 import { ContainerComponent } from './container/container.component';
 import { ExitComponent } from './exit/exit.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ExitComponent } from './exit/exit.component';
   ],
   providers: [
   ],
-  declarations: [MainComponent, ListComponent, ContainerComponent, ExitComponent]
+  declarations: [MainComponent, ListComponent, ContainerComponent, ExitComponent, FormComponent]
 })
 export class AddingModule { }

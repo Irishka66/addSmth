@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {MainComponent} from './main/main.component';
 import {ExitComponent} from './exit/exit.component';
 import {ContainerComponent} from './container/container.component';
+import {FormComponent} from './form/form.component';
 
 //  I need this code to apply lazy-loading
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'exit',
         component: ExitComponent,
+      },
+      {
+        path: 'form',
+        component: FormComponent,
       }
     ]
   }

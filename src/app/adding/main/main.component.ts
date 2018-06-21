@@ -18,10 +18,10 @@ export class MainComponent implements OnInit, OnDestroy {
   public searchText: string;
 
   constructor(private dataService: DataService) {
-    window.onbeforeunload = (e) => {
-      console.log('onbeforeunload');
-      this.clearSearchText();
-    };
+    // window.onbeforeunload = (e) => {
+    //   console.log('onbeforeunload');
+    //   this.clearSearchText();
+    // };
   }
 
   ngOnInit() {
@@ -32,6 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   add() {
+    this.clearSearchText();
     let indexRecord: string = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
     let obj = {
       'indexRecord': indexRecord,
@@ -55,7 +56,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   clearSearchText() {
     this.searchText = '';
-    this.dataService.arrAddedText = this.dataService.arrAddedTextCopy;
+    this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
+    // this.dataService.arrAddedText = this.dataService.arrAddedTextCopy;
     this.dataService.saveLocalRecords();
   }
 

@@ -1,0 +1,36 @@
+<p>
+  form works!
+</p>
+
+<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+  <div class="form-group">
+    <label>Name</label>
+    <input class="form-control" name="name" formControlName="userName" placeholder="enter name" />
+
+    <div class="alert alert-danger"
+         *ngIf="myForm.controls['userName'].invalid && myForm.controls['userName'].touched">
+      Please enter your name
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input class="form-control" name="email" formControlName="userEmail" placeholder="enter email"/>
+
+    <div class="alert alert-danger"
+         *ngIf="myForm.controls['userEmail'].invalid && myForm.controls['userEmail'].touched">
+      Incorrect email
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Phone number (optional)</label>
+    <input class="form-control" name="phone" formControlName="userPhone" placeholder="enter phone" />
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default" [disabled]="myForm.invalid">
+      Send
+    </button>
+  </div>
+</form>
+
+
+<!--(input)="onPhoneChange()" [required]="phoneRequired" pattern="(0[1-9]{1}|1[0-2]{1}).\d{4}$"-->

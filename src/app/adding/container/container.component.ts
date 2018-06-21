@@ -15,8 +15,6 @@ import {from} from 'rxjs';
   styleUrls: ['./container.component.scss']
 })
 export class ContainerComponent implements OnInit {
-  isActiveMain: boolean;
-  isActiveExit: boolean;
 
   public smth = new Observable<string>((obs) => {
     setTimeout(() => {obs.next('someValue')}, 1000);
@@ -30,19 +28,8 @@ export class ContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.isActiveMain = true;
-    this.isActiveExit = false;
-  }
-
-  toggleButtonClass() {
-    this.isActiveMain = !this.isActiveMain;
-    this.isActiveExit = !this.isActiveExit;
-
     this.smth.subscribe((mess) => {console.log(mess);});
     this.observable.subscribe((zz) => {console.log(zz);});
     this.anArray$.subscribe((cc) => {console.log(cc);});
   }
-
-
-
 }
