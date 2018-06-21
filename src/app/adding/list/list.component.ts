@@ -10,7 +10,10 @@ import {DataService} from '../../services/data.service';
 export class ListComponent implements OnInit {
   @Input() records: Array<string>;
   @Output() printLikes = new EventEmitter<any>();
-  public iFromEdit: number;
+  iFromEdit: number;
+  jFromEditSub: number;
+  iFromEditSub: number;
+
 
   //on event that call function like() in child: the event printLikes will be emited
   like(varFromChild: any) {
@@ -21,6 +24,8 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.iFromEdit = -1;
+    this.jFromEditSub = -1;
+    this.iFromEditSub = -1;
     if (JSON.parse(localStorage.getItem('doneRecords')) !== null) {
       this.dataService.arrDoneRecords = JSON.parse(localStorage.getItem('doneRecords'));
     }
@@ -64,12 +69,14 @@ export class ListComponent implements OnInit {
   blurFromRecord(i) {
     let editedRecord = document.getElementsByClassName("editable")['0'].innerText;
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
+    let currentRecord = this.dataService.arrAddedText[i];
+    currentRecord['text'] = editedRecord;
 
-    this.dataService.arrAddedText.splice(i, 1, {'indexRecord': currentIndex, 'text': editedRecord});
+    this.dataService.arrAddedText.splice(i, 1, currentRecord);
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
-        this.dataService.arrAddedTextCopy.splice(m, 1, {'indexRecord': currentIndex, 'text': editedRecord});
+        this.dataService.arrAddedTextCopy.splice(m, 1, currentRecord);
       }
     }
 
@@ -77,4 +84,48 @@ export class ListComponent implements OnInit {
     this.dataService.saveLocalRecords();
   }
 
+  addSub(i) {
+    this.dataService.arrAddedTextCopy[i]['subtree'].push('');
+    this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
+    this.dataService.saveLocalRecords();
+  }
+
+  deleteSub(i, j) {
+    this.dataService.arrAddedTextCopy[i]['subtree'].splice(j, 1);
+    this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
+    // let deleted = this.dataService.arrAddedText[i]['subtree'].splice(j, 1);
+    // for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
+    //   if (deleted[0]['indexRecord'] === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
+    //     this.dataService.arrAddedTextCopy[i]['subtree'].splice(m, 1);
+    //   }
+    // }
+
+    this.dataService.saveLocalRecords();
+  }
+
+  editSub(i, j) {
+    this.jFromEditSub = j;
+    this.iFromEditSub = i;
+  }
+
+  blurFromSubRecord(i, j) {
+    let editedSubRecord = document.getElementsByClassName("editableSub")['0'].innerText;
+    // let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
+    let currentRecord = this.dataService.arrAddedText[i];
+    currentRecord['subtree'][j] = editedSubRecord;
+
+    // this.dataService.arrAddedText.splice(i, 1, currentRecord);
+    //
+    // for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
+    //   if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
+    //     this.dataService.arrAddedTextCopy.splice(m, 1, currentRecord);
+    //   }
+    // }
+
+    this.dataService.arrAddedTextCopy.splice(i, 1, currentRecord);
+    this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
+
+    this.jFromEditSub = -1;
+    this.dataService.saveLocalRecords();
+  }
 }

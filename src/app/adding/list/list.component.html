@@ -9,11 +9,25 @@
       <div class="input-group-append">
         <!--we can get some value in parent from like()-->
         <button class="btn btn-outline-secondary" type="button" (click)="like(23)">Like</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="addSub(i)">Add sub</button>
         <button class="btn btn-outline-secondary" type="button" (click)="edit(i)">Edit</button>
         <button class="btn btn-outline-secondary" type="button" (click)="done(i)">Done</button>
         <button class="btn btn-outline-secondary" type="button" (click)="deleteRecord(i)">Delete</button>
       </div>
     </div>
+
+    <ul>
+      <li *ngFor="let subTreeItem of dataService.arrAddedText[i]['subtree'], let j = index">
+        <div class="input-group mb-3">
+          <div class="form-control" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub) }" [attr.contenteditable]="j==jFromEditSub" (blur)="blurFromSubRecord(i, j)">{{subTreeItem}}</div>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="editSub(i, j)">Edit</button>
+            <button class="btn btn-outline-secondary" type="button" (click)="deleteSub(i, j)">Delete</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
   </li>
 </ul>
 

@@ -13,7 +13,7 @@
 
 <div class="input-group mb-3">
   <input #inputField type="text" class="form-control" placeholder="search smth" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchText" name="searchText"
-         (keyup)="search(inputField.value)" >
+         (input)="search(inputField.value)" >
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" (click)="clearSearchText()">Clear field</button>
   </div>

@@ -34,10 +34,12 @@ export class MainComponent implements OnInit, OnDestroy {
   add() {
     this.clearSearchText();
     let indexRecord: string = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+    let subTree: Array<any> = [];
     let obj = {
-      'indexRecord': indexRecord,
-      'text': this.addedText
-    };
+        'indexRecord': indexRecord,
+        'text': this.addedText,
+        'subtree': subTree,
+      };
     this.dataService.arrAddedText.push(obj);
     this.dataService.arrAddedTextCopy.push(obj);
     this.addedText = '';
@@ -46,9 +48,11 @@ export class MainComponent implements OnInit, OnDestroy {
 
     this.dataService.arrAddedTextCopy = JSON.parse(JSON.stringify(this.dataService.arrAddedText));
 
+    console.log(obj);
   }
 
   search(searchText) {
+    this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
     this.dataService.arrAddedText = this.dataService.arrAddedText.filter(function(item) {
       return (item['text'].toString().toLowerCase().includes(searchText.toLowerCase()));
     });
@@ -57,12 +61,11 @@ export class MainComponent implements OnInit, OnDestroy {
   clearSearchText() {
     this.searchText = '';
     this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
-    // this.dataService.arrAddedText = this.dataService.arrAddedTextCopy;
     this.dataService.saveLocalRecords();
   }
 
   //this function is emitted from child: list component
-  printLikes(varFromChild: any){
+  printLikes(varFromChild: any) {
     console.log('varFromChild ' + varFromChild);
     this.clicks++;
   }
