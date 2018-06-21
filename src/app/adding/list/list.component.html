@@ -5,7 +5,7 @@
 <ul>
   <li *ngFor="let record of records, let i = index">
     <div class="input-group mb-3">
-      <div class="form-control" [ngClass]="{editable: i==iFromEdit}" [attr.contenteditable]="i==iFromEdit" (blur)="blurFromRecord(i)">{{record}}</div>
+      <div class="form-control" [ngClass]="{editable: i==iFromEdit}" [attr.contenteditable]="i==iFromEdit" (blur)="blurFromRecord(i)">{{record['text']}}</div>
       <div class="input-group-append">
         <!--we can get some value in parent from like()-->
         <button class="btn btn-outline-secondary" type="button" (click)="like(23)">Like</button>
@@ -22,7 +22,7 @@
 <ul>
   <li *ngFor="let doneRecord of dataService.arrDoneRecords, let i = index">
     <div class="input-group mb-3">
-      <div class="form-control">{{doneRecord}}</div>
+      <div class="form-control">{{doneRecord['text']}}</div>
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" (click)="deleteDoneRecord(i)">Delete</button>
       </div>

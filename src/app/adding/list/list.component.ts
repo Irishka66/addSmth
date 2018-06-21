@@ -28,6 +28,12 @@ export class ListComponent implements OnInit {
 
   done(i) {
     let doneRecord = this.dataService.arrAddedText.splice(i, 1);
+    for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
+      if (doneRecord[0]['indexRecord'] === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
+        this.dataService.arrAddedTextCopy.splice(m, 1);
+      }
+    }
+
     this.iFromEdit = -1;
     this.dataService.saveLocalRecords();
 
@@ -36,7 +42,12 @@ export class ListComponent implements OnInit {
   }
 
   deleteRecord(i) {
-    this.dataService.arrAddedText.splice(i, 1);
+    let deleted = this.dataService.arrAddedText.splice(i, 1);
+    for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
+      if (deleted[0]['indexRecord'] === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
+        this.dataService.arrAddedTextCopy.splice(m, 1);
+      }
+    }
     this.dataService.saveLocalRecords();
   }
 
@@ -52,7 +63,16 @@ export class ListComponent implements OnInit {
 
   blurFromRecord(i) {
     let editedRecord = document.getElementsByClassName("editable")['0'].innerText;
-    this.dataService.arrAddedText.splice(i, 1, editedRecord);
+    let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
+
+    this.dataService.arrAddedText.splice(i, 1, {'indexRecord': currentIndex, 'text': editedRecord});
+
+    for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
+      if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
+        this.dataService.arrAddedTextCopy.splice(m, 1, {'indexRecord': currentIndex, 'text': editedRecord});
+      }
+    }
+
     this.iFromEdit = -1;
     this.dataService.saveLocalRecords();
   }

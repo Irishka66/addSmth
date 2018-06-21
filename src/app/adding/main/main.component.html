@@ -9,11 +9,21 @@
   </div>
 </div>
 
+<div>Search smth:</div>
+
+<div class="input-group mb-3">
+  <input #inputField type="text" class="form-control" placeholder="search smth" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchText" name="searchText"
+         (keyup)="search(inputField.value)">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" (click)="clearSearchText()">Clear field</button>
+  </div>
+</div>
+
 <button type="button" class="btn btn-primary">
   Likes <span class="badge badge-light">{{clicks}}</span>
 </button>
 
 <!--records will go to child as property, printLikes will go from child as event-->
-<app-list [records]="arrAddedText" (printLikes)="printLikes($event)"></app-list>
+<app-list [records]="dataService.arrAddedText" (printLikes)="printLikes($event)"></app-list>
 
 

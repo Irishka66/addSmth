@@ -4,10 +4,10 @@ import { Subject } from 'rxjs';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import {from} from 'rxjs';
 
-const clicks = fromEvent(document, 'click');
-clicks.subscribe(
-  x => console.log(x)
-);
+// const clicks = fromEvent(document, 'click');
+// clicks.subscribe(
+//   x => console.log(x)
+// );
 
 @Component({
   selector: 'app-container',

@@ -5,12 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
   public arrAddedText: Array<any> = [];
+  public arrAddedTextCopy: Array<any> = [];
   public arrDoneRecords: Array<any> = [];
 
   constructor() { }
 
   public saveLocalRecords() {
-    let localRecords = JSON.stringify(this.arrAddedText);
+    let localRecords = JSON.stringify(this.arrAddedTextCopy);
     localStorage.setItem('records', localRecords);
   }
   public saveLocalDoneRecords() {
