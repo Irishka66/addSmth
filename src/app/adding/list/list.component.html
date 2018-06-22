@@ -22,7 +22,7 @@
           >
 
         <div class="input-group mb-3 drag-block" ngDraggable (edge)="checkEdge($event)" [bounds]="myBounds" [inBounds]="inBounds"
-             (started)="onStart($event)" (stopped)="onStop($event)" (endOffset)="onMoveEnd($event)">
+             (started)="onStart($event)" (stopped)="onStop($event)" (endOffset)="onMoveEnd($event, i, j)">
           <div class="form-control" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub) }" [attr.contenteditable]="j==jFromEditSub" (blur)="blurFromSubRecord(i, j)">{{subTreeItem}}</div>
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="editSub(i, j)">Edit</button>

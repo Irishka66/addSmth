@@ -32,6 +32,8 @@ export class ListComponent implements OnInit {
   dragBlockLeft: any;
   dragBlockTransform: any;
 
+  // isDragNow: boolean;
+
 
   constructor(private dataService: DataService) { }
 
@@ -52,45 +54,39 @@ export class ListComponent implements OnInit {
 
   checkEdge(event) {
     this.edge = event;
-    console.log('edge:', event);
+    // console.log('edge:', event);
   }
 
   onStart(event) {
-    console.log('started output:', event);
-    console.log(event.style.transform);
-    this.dragBlockTransform = event.style.transform;
-    console.log(this.dragBlockTransform);
-
   }
 
   onStop(event) {
-    this.endOffset.x = event.x;
-    this.endOffset.y = event.y;
-    console.log('stopped output:', event);
-
-    console.log('stopped output onStop:', event);
-    console.log(event.style);
-    console.log(event.style.transform);
-    // console.log(event.style.transform);
-    // console.log(getComputedStyle(event).transform);
-
-    // var computedStyle = getComputedStyle(document.body);
+    event.classList.add("isDragNow");
   }
 
-  onMoveEnd(event) {
-
+  onMoveEnd(event, i, j) {
+    // console.log('onMoveEnd stopped output:', event);
     this.endOffset.x = event.x;
     this.endOffset.y = event.y;
-    console.log('stopped output:', event);
+    console.log(document.getElementsByClassName('li-sub')[0]);
 
-    if (this.endOffset.x > -75) {
-      console.log('stopped output:', event);
+    if (this.endOffset.x > -100) {
+      document.getElementsByClassName('isDragNow')[0]['style']['transform'] = 'translate(0px, 0px)';
+    } else {
+      let indexRecord: string = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+      let subTree: Array<any> = [];
+      let obj = {
+        'indexRecord': indexRecord,
+        'text': this.dataService.arrAddedText[i]['subtree'][j],
+        'subtree': subTree,
+      };
+      this.dataService.arrAddedText.push(obj);
+      this.dataService.arrAddedTextCopy.push(obj);
+      this.deleteSub(i, j);
+      // this.dataService.saveLocalRecords();
     }
-
+    document.getElementsByClassName('isDragNow')[0].classList.remove('isDragNow');
   }
-  // mouseUpDraggable() {
-  //
-  // }
 
   done(i) {
     let doneRecord = this.dataService.arrAddedText.splice(i, 1);
