@@ -5,7 +5,8 @@
 <ul>
   <li *ngFor="let record of records, let i = index">
     <div class="input-group mb-3">
-      <div class="form-control" [ngClass]="{editable: i==iFromEdit}" [attr.contenteditable]="i==iFromEdit" (blur)="blurFromRecord(i)">{{record['text']}}</div>
+      <div class="form-control" [ngClass]="{editable: i==iFromEdit}" [attr.contenteditable]="i==iFromEdit" 
+          (blur)="blurFromRecord(i)" (click)="edit(i)">{{record['text']}}</div>
       <div class="input-group-append">
         <!--we can get some value in parent from like()-->
         <button class="btn btn-outline-secondary" type="button" (click)="like(23)">Like</button>
@@ -23,7 +24,8 @@
 
         <div class="input-group mb-3 drag-block" ngDraggable (edge)="checkEdge($event)" [bounds]="myBounds" [inBounds]="inBounds"
              (started)="onStart($event)" (stopped)="onStop($event)" (endOffset)="onMoveEnd($event, i, j)">
-          <div class="form-control" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub) }" [attr.contenteditable]="j==jFromEditSub" (blur)="blurFromSubRecord(i, j)">{{subTreeItem}}</div>
+          <div class="form-control" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub) }" [attr.contenteditable]="j==jFromEditSub" 
+              (blur)="blurFromSubRecord(i, j)" (click)="editSub(i, j)">{{subTreeItem}}</div>
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="editSub(i, j)">Edit</button>
             <button class="btn btn-outline-secondary" type="button" (click)="deleteSub(i, j)">Delete</button>

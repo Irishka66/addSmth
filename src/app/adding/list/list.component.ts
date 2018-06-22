@@ -28,9 +28,6 @@ export class ListComponent implements OnInit {
   };
   movingOffset = { x: 0, y: 0 };
   endOffset = { x: 0, y: 0 };
-  // dragBlock: any;
-  // dragBlockLeft: any;
-  // dragBlockTransform: any;
 
   constructor(private dataService: DataService) { }
 
@@ -81,6 +78,7 @@ export class ListComponent implements OnInit {
       }
       this.deleteSub(i, j);
     }
+
     document.getElementsByClassName('isDragNow')[0].classList.remove('isDragNow');
   }
 
@@ -148,11 +146,11 @@ export class ListComponent implements OnInit {
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
-        this.dataService.arrAddedTextCopy[m]['subtree'].push('Do a step');
+        this.dataService.arrAddedTextCopy[m]['subtree'].push('');
       }
     }
 
-    this.dataService.arrAddedText[i]['subtree'].push('Do a step');
+    this.dataService.arrAddedText[i]['subtree'].push('');
 
     console.log(this.dataService.arrAddedText);
     this.dataService.saveLocalRecords();
@@ -175,13 +173,11 @@ export class ListComponent implements OnInit {
   }
 
   blurFromSubRecord(i, j) {
-    debugger;
+    // debugger;
     let editedSubRecord = document.getElementsByClassName("editableSub")['0'].innerText;
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
 
     this.dataService.arrAddedText[i]['subtree'].splice(j, 1, editedSubRecord);
-
-    let helpArr = this.dataService.arrAddedText;
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
@@ -191,6 +187,5 @@ export class ListComponent implements OnInit {
 
     this.jFromEditSub = -1;
     this.dataService.saveLocalRecords();
-    this.dataService.arrAddedText = helpArr;
   }
 }
