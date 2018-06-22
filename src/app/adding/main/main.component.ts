@@ -26,8 +26,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (JSON.parse(localStorage.getItem('records')) !== null) {
-      this.dataService.arrAddedText = JSON.parse(localStorage.getItem('records'));
+      // this.dataService.arrAddedText = JSON.parse(localStorage.getItem('records'));
       this.dataService.arrAddedTextCopy = JSON.parse(localStorage.getItem('records'));
+      this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
     }
   }
 
@@ -40,13 +41,13 @@ export class MainComponent implements OnInit, OnDestroy {
         'text': this.addedText || 'Do smth usefull',
         'subtree': subTree,
       };
-    this.dataService.arrAddedText.push(obj);
+    this.dataService.arrAddedTextCopy.push(obj);
     // this.dataService.arrAddedTextCopy.push(obj);
     this.addedText = '';
 
 
 
-    this.dataService.arrAddedTextCopy = JSON.parse(JSON.stringify(this.dataService.arrAddedText));
+    this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
     this.dataService.saveLocalRecords();
     console.log(obj);
   }

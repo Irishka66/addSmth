@@ -28,12 +28,9 @@ export class ListComponent implements OnInit {
   };
   movingOffset = { x: 0, y: 0 };
   endOffset = { x: 0, y: 0 };
-  dragBlock: any;
-  dragBlockLeft: any;
-  dragBlockTransform: any;
-
-  // isDragNow: boolean;
-
+  // dragBlock: any;
+  // dragBlockLeft: any;
+  // dragBlockTransform: any;
 
   constructor(private dataService: DataService) { }
 
@@ -44,17 +41,10 @@ export class ListComponent implements OnInit {
     if (JSON.parse(localStorage.getItem('doneRecords')) !== null) {
       this.dataService.arrDoneRecords = JSON.parse(localStorage.getItem('doneRecords'));
     }
-
-    // this.dragBlock = document.querySelector('.drag-block');
-    // console.log(document.querySelector('.drag-block'));
-    // this.dragBlockLeft = this.dragBlock.getBoundingClientRect().left;
-
-
   }
 
   checkEdge(event) {
     this.edge = event;
-    // console.log('edge:', event);
   }
 
   onStart(event) {
@@ -65,12 +55,12 @@ export class ListComponent implements OnInit {
   }
 
   onMoveEnd(event, i, j) {
-    // console.log('onMoveEnd stopped output:', event);
     this.endOffset.x = event.x;
     this.endOffset.y = event.y;
-    console.log(document.getElementsByClassName('li-sub')[0]);
+    let styleLiSub = getComputedStyle(document.getElementsByClassName('li-sub')[0]);
+    let paddingLeft = parseInt(styleLiSub['paddingLeft']);
 
-    if (this.endOffset.x > -100) {
+    if (this.endOffset.x > - paddingLeft/2) {
       document.getElementsByClassName('isDragNow')[0]['style']['transform'] = 'translate(0px, 0px)';
     } else {
       let indexRecord: string = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
@@ -80,10 +70,16 @@ export class ListComponent implements OnInit {
         'text': this.dataService.arrAddedText[i]['subtree'][j],
         'subtree': subTree,
       };
-      this.dataService.arrAddedText.push(obj);
-      this.dataService.arrAddedTextCopy.push(obj);
+      let obj1 = JSON.parse(JSON.stringify(obj));
+
+
+      this.dataService.arrAddedText.splice(i + 1 , 0, obj);
+      for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
+        if (this.dataService.arrAddedText[i]['indexRecord'] === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
+          this.dataService.arrAddedTextCopy.splice(m + 1, 0, obj1);
+        }
+      }
       this.deleteSub(i, j);
-      // this.dataService.saveLocalRecords();
     }
     document.getElementsByClassName('isDragNow')[0].classList.remove('isDragNow');
   }
@@ -130,11 +126,13 @@ export class ListComponent implements OnInit {
     let currentRecord = this.dataService.arrAddedText[i];
     currentRecord['text'] = editedRecord;
 
+    let currentRecord1 = JSON.parse(JSON.stringify(currentRecord))
+
     this.dataService.arrAddedText.splice(i, 1, currentRecord);
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
-        this.dataService.arrAddedTextCopy.splice(m, 1, currentRecord);
+        this.dataService.arrAddedTextCopy.splice(m, 1, currentRecord1);
       }
     }
 
@@ -145,16 +143,18 @@ export class ListComponent implements OnInit {
   addSub(i) {
 
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
-    this.dataService.arrAddedText[i]['subtree'].push('');
+    // this.dataService.arrAddedText[i]['subtree'].push('Do a step');
 
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
-        this.dataService.arrAddedTextCopy[m]['subtree'].push('');
+        this.dataService.arrAddedTextCopy[m]['subtree'].push('Do a step');
       }
     }
 
+    this.dataService.arrAddedText[i]['subtree'].push('Do a step');
 
+    console.log(this.dataService.arrAddedText);
     this.dataService.saveLocalRecords();
   }
 
@@ -175,10 +175,13 @@ export class ListComponent implements OnInit {
   }
 
   blurFromSubRecord(i, j) {
+    debugger;
     let editedSubRecord = document.getElementsByClassName("editableSub")['0'].innerText;
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
 
     this.dataService.arrAddedText[i]['subtree'].splice(j, 1, editedSubRecord);
+
+    let helpArr = this.dataService.arrAddedText;
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
@@ -186,13 +189,8 @@ export class ListComponent implements OnInit {
       }
     }
 
-    console.log('arrAddedText');
-    console.log(this.dataService.arrAddedText);
-    console.log('arrAddedTextCopy');
-    console.log(this.dataService.arrAddedTextCopy);
-
-
     this.jFromEditSub = -1;
     this.dataService.saveLocalRecords();
+    this.dataService.arrAddedText = helpArr;
   }
 }
