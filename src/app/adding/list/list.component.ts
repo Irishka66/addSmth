@@ -10,15 +10,28 @@ import {DataService} from '../../services/data.service';
 export class ListComponent implements OnInit {
   @Input() records: Array<string>;
   @Output() printLikes = new EventEmitter<any>();
+//on event that call function like() in child: the event printLikes will be emited
+  like(varFromChild: any) {
+    this.printLikes.emit(varFromChild);
+  }
+
   iFromEdit: number;
   jFromEditSub: number;
   iFromEditSub: number;
 
+  inBounds = true;
+  edge = {
+    top: true,
+    bottom: true,
+    left: true,
+    right: true
+  };
+  movingOffset = { x: 0, y: 0 };
+  endOffset = { x: 0, y: 0 };
+  dragBlock: any;
+  dragBlockLeft: any;
+  dragBlockTransform: any;
 
-  //on event that call function like() in child: the event printLikes will be emited
-  like(varFromChild: any) {
-    this.printLikes.emit(varFromChild);
-  }
 
   constructor(private dataService: DataService) { }
 
@@ -29,7 +42,55 @@ export class ListComponent implements OnInit {
     if (JSON.parse(localStorage.getItem('doneRecords')) !== null) {
       this.dataService.arrDoneRecords = JSON.parse(localStorage.getItem('doneRecords'));
     }
+
+    // this.dragBlock = document.querySelector('.drag-block');
+    // console.log(document.querySelector('.drag-block'));
+    // this.dragBlockLeft = this.dragBlock.getBoundingClientRect().left;
+
+
   }
+
+  checkEdge(event) {
+    this.edge = event;
+    console.log('edge:', event);
+  }
+
+  onStart(event) {
+    console.log('started output:', event);
+    console.log(event.style.transform);
+    this.dragBlockTransform = event.style.transform;
+    console.log(this.dragBlockTransform);
+
+  }
+
+  onStop(event) {
+    this.endOffset.x = event.x;
+    this.endOffset.y = event.y;
+    console.log('stopped output:', event);
+
+    console.log('stopped output onStop:', event);
+    console.log(event.style);
+    console.log(event.style.transform);
+    // console.log(event.style.transform);
+    // console.log(getComputedStyle(event).transform);
+
+    // var computedStyle = getComputedStyle(document.body);
+  }
+
+  onMoveEnd(event) {
+
+    this.endOffset.x = event.x;
+    this.endOffset.y = event.y;
+    console.log('stopped output:', event);
+
+    if (this.endOffset.x > -75) {
+      console.log('stopped output:', event);
+    }
+
+  }
+  // mouseUpDraggable() {
+  //
+  // }
 
   done(i) {
     let doneRecord = this.dataService.arrAddedText.splice(i, 1);
@@ -68,6 +129,7 @@ export class ListComponent implements OnInit {
 
   blurFromRecord(i) {
     let editedRecord = document.getElementsByClassName("editable")['0'].innerText;
+    // console.log('editedRecord ' + editedRecord);
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
     let currentRecord = this.dataService.arrAddedText[i];
     currentRecord['text'] = editedRecord;

@@ -13,8 +13,14 @@
 
 ul {
   margin-top: 1rem;
+  list-style: none;
 }
 
-.sub {
-  padding-left: 100px;
+.ul-sub {
+  -webkit-padding-start: 0;
+  .li-sub {
+    padding-left: 150px;
+  }
 }
+
+//.drag-boundary

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 
 import { AddingRoutingModule } from './adding-routing.module';
@@ -16,7 +17,8 @@ import { FormComponent } from './form/form.component';
     CommonModule,
     AddingRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularDraggableModule
   ],
   providers: [
   ],

@@ -37,17 +37,17 @@ export class MainComponent implements OnInit, OnDestroy {
     let subTree: Array<any> = [];
     let obj = {
         'indexRecord': indexRecord,
-        'text': this.addedText,
+        'text': this.addedText || 'Do smth usefull',
         'subtree': subTree,
       };
     this.dataService.arrAddedText.push(obj);
-    this.dataService.arrAddedTextCopy.push(obj);
+    // this.dataService.arrAddedTextCopy.push(obj);
     this.addedText = '';
-    this.dataService.saveLocalRecords();
+
 
 
     this.dataService.arrAddedTextCopy = JSON.parse(JSON.stringify(this.dataService.arrAddedText));
-
+    this.dataService.saveLocalRecords();
     console.log(obj);
   }
 

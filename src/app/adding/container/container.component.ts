@@ -28,8 +28,8 @@ export class ContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.smth.subscribe((mess) => {console.log(mess);});
-    this.observable.subscribe((zz) => {console.log(zz);});
-    this.anArray$.subscribe((cc) => {console.log(cc);});
+    // this.smth.subscribe((mess) => {console.log(mess);});
+    // this.observable.subscribe((zz) => {console.log(zz);});
+    // this.anArray$.subscribe((cc) => {console.log(cc);});
   }
 }

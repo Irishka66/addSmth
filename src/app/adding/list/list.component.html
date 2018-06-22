@@ -16,15 +16,20 @@
       </div>
     </div>
 
-    <ul>
-      <li *ngFor="let subTreeItem of dataService.arrAddedText[i]['subtree'], let j = index">
-        <div class="input-group mb-3">
+    <ul class="ul-sub">
+      <li class="li-sub drag-boundary" [ngClass]="{ 'top-b': !edge?.top, 'bottom-b': !edge?.bottom, 'left-b': !edge?.left, 'right-b': !edge?.right }" #myBounds
+          *ngFor="let subTreeItem of dataService.arrAddedText[i]['subtree'], let j = index"
+          >
+
+        <div class="input-group mb-3 drag-block" ngDraggable (edge)="checkEdge($event)" [bounds]="myBounds" [inBounds]="inBounds"
+             (started)="onStart($event)" (stopped)="onStop($event)" (endOffset)="onMoveEnd($event)">
           <div class="form-control" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub) }" [attr.contenteditable]="j==jFromEditSub" (blur)="blurFromSubRecord(i, j)">{{subTreeItem}}</div>
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="editSub(i, j)">Edit</button>
             <button class="btn btn-outline-secondary" type="button" (click)="deleteSub(i, j)">Delete</button>
           </div>
         </div>
+
       </li>
     </ul>
 
