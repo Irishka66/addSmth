@@ -14,7 +14,7 @@ import {DataService} from '../../services/data.service';
 export class MainComponent implements OnInit, OnDestroy {
 
   public addedText: string;
-  public clicks: number = 0;
+  // public clicks: number = 0;
   public searchText: string;
 
   constructor(private dataService: DataService) {
@@ -30,6 +30,10 @@ export class MainComponent implements OnInit, OnDestroy {
       this.dataService.arrAddedTextCopy = JSON.parse(localStorage.getItem('records'));
       this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
     }
+    if (JSON.parse(localStorage.getItem('karma')) !== null) {
+      this.dataService.karmaClicks = JSON.parse(localStorage.getItem('karma'));
+    }
+
   }
 
   add() {
@@ -53,7 +57,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   search(searchText) {
-    this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
+    // this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
     this.dataService.arrAddedText = this.dataService.arrAddedText.filter(function(item) {
       return (item['text'].toString().toLowerCase().includes(searchText.toLowerCase()));
     });
@@ -62,13 +66,15 @@ export class MainComponent implements OnInit, OnDestroy {
   clearSearchText() {
     this.searchText = '';
     this.dataService.arrAddedText = JSON.parse(JSON.stringify(this.dataService.arrAddedTextCopy));
-    this.dataService.saveLocalRecords();
+    // this.dataService.saveLocalRecords();
   }
 
   //this function is emitted from child: list component
-  printLikes(varFromChild: any) {
-    console.log('varFromChild ' + varFromChild);
-    this.clicks++;
+  printKarma(varFromChild: any) {
+    // console.log('varFromChild ' + varFromChild);
+    // this.clicks++;
+    this.dataService.printKarma();
+    this.dataService.saveKarma();
   }
 
   ngOnDestroy() {

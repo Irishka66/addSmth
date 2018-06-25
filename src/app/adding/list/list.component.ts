@@ -9,10 +9,10 @@ import {DataService} from '../../services/data.service';
 })
 export class ListComponent implements OnInit {
   @Input() records: Array<string>;
-  @Output() printLikes = new EventEmitter<any>();
+  @Output() printKarma = new EventEmitter<any>();
 //on event that call function like() in child: the event printLikes will be emited
   like(varFromChild: any) {
-    this.printLikes.emit(varFromChild);
+    this.printKarma.emit(varFromChild);
   }
 
   iFromEdit: number;
@@ -52,6 +52,8 @@ export class ListComponent implements OnInit {
   }
 
   onMoveEnd(event, i, j) {
+    // debugger;
+
     this.endOffset.x = event.x;
     this.endOffset.y = event.y;
     let styleLiSub = getComputedStyle(document.getElementsByClassName('li-sub')[0]);
@@ -64,7 +66,7 @@ export class ListComponent implements OnInit {
       let subTree: Array<any> = [];
       let obj = {
         'indexRecord': indexRecord,
-        'text': this.dataService.arrAddedText[i]['subtree'][j],
+        'text': this.dataService.arrAddedText[i]['subtree'][j] || 'Do smth usefull',
         'subtree': subTree,
       };
       let obj1 = JSON.parse(JSON.stringify(obj));
@@ -139,18 +141,17 @@ export class ListComponent implements OnInit {
   }
 
   addSub(i) {
-
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
     // this.dataService.arrAddedText[i]['subtree'].push('Do a step');
 
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
-        this.dataService.arrAddedTextCopy[m]['subtree'].push('');
+        this.dataService.arrAddedTextCopy[m]['subtree'].push('Do smth');
       }
     }
 
-    this.dataService.arrAddedText[i]['subtree'].push('');
+    this.dataService.arrAddedText[i]['subtree'].push('Do smth');
 
     console.log(this.dataService.arrAddedText);
     this.dataService.saveLocalRecords();
@@ -168,6 +169,7 @@ export class ListComponent implements OnInit {
   }
 
   editSub(i, j) {
+    // debugger;
     this.jFromEditSub = j;
     this.iFromEditSub = i;
   }

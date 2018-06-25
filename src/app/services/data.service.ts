@@ -7,6 +7,7 @@ export class DataService {
   public arrAddedText: Array<any> = [];
   public arrAddedTextCopy: Array<any> = [];
   public arrDoneRecords: Array<any> = [];
+  public karmaClicks: number = 0;
 
   constructor() { }
 
@@ -17,5 +18,14 @@ export class DataService {
   public saveLocalDoneRecords() {
     let localDoneRecords = JSON.stringify(this.arrDoneRecords);
     localStorage.setItem('doneRecords', localDoneRecords);
+  }
+
+  public printKarma() {
+    this.karmaClicks ++;
+  }
+
+  public saveKarma() {
+    let localKarma = JSON.stringify(this.karmaClicks);
+    localStorage.setItem('karma', localKarma);
   }
 }

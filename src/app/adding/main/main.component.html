@@ -5,7 +5,7 @@
 <div class="input-group mb-3">
   <input type="text" class="form-control" placeholder="write smth" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="addedText" name="addedText">
   <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button" (click)="add()">Add</button>
+    <button class="btn btn-outline-secondary" type="button" (click)="add()"><i class="fa fa-plus"></i></button>
   </div>
 </div>
 
@@ -15,15 +15,15 @@
   <input #inputField type="text" class="form-control" placeholder="search smth" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchText" name="searchText"
          (input)="search(inputField.value)" >
   <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button" (click)="clearSearchText()">Clear field</button>
+    <button class="btn btn-outline-secondary" type="button" (click)="clearSearchText()"><i class="fa fa-eraser"></i></button>
   </div>
 </div>
 
 <button type="button" class="btn btn-primary">
-  Likes <span class="badge badge-light">{{clicks}}</span>
+  Plus in karma <span class="badge badge-light">{{dataService.karmaClicks}}</span>
 </button>
 
 <!--records will go to child as property, printLikes will go from child as event-->
-<app-list [records]="dataService.arrAddedText" (printLikes)="printLikes($event)"></app-list>
+<app-list [records]="dataService.arrAddedText" (printKarma)="printKarma($event)"></app-list>
 
 
