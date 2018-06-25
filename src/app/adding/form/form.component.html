@@ -2,32 +2,43 @@
   form works!
 </p>
 
-<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
-  <div class="form-group">
-    <label>Name</label>
-    <input class="form-control" name="name" formControlName="userName" placeholder="enter name" />
+<h2>Enter information about your friend</h2>
 
+<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Name</span>
+    </div>
+    <input type="text" class="form-control" name="name" formControlName="friendName" placeholder="enter name" />
     <div class="alert alert-danger"
-         *ngIf="myForm.controls['userName'].invalid && myForm.controls['userName'].touched">
+         *ngIf="myForm.controls['friendName'].invalid && myForm.controls['friendName'].touched">
       Please enter your name
     </div>
   </div>
-  <div class="form-group">
-    <label>Email</label>
-    <input class="form-control" name="email" formControlName="userEmail" placeholder="enter email"/>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Email</span>
+    </div>
+    <input class="form-control" name="email" formControlName="friendEmail" placeholder="enter email"/>
 
     <div class="alert alert-danger"
-         *ngIf="myForm.controls['userEmail'].invalid && myForm.controls['userEmail'].touched">
+         *ngIf="myForm.controls['friendEmail'].invalid && myForm.controls['friendEmail'].touched">
       Incorrect email
     </div>
   </div>
-  <div class="form-group">
-    <label>Phone number (optional)</label>
-    <input class="form-control" name="phone" formControlName="userPhone" placeholder="enter phone" />
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Phone number (optional)</span>
+    </div>
+    <input class="form-control" name="phone" formControlName="friendPhone" placeholder="enter phone" />
   </div>
+
   <div class="form-group">
     <button class="btn btn-default" [disabled]="myForm.invalid">
-      Send
+      Write down
     </button>
   </div>
 </form>

@@ -11,6 +11,8 @@ import { ListComponent } from './list/list.component';
 import { ContainerComponent } from './container/container.component';
 import { ExitComponent } from './exit/exit.component';
 import { FormComponent } from './form/form.component';
+import { FriendsComponent } from './friends/friends.component';
+import { FriendComponent } from './friend/friend.component';
 
 @NgModule({
   imports: [
@@ -22,6 +24,14 @@ import { FormComponent } from './form/form.component';
   ],
   providers: [
   ],
-  declarations: [MainComponent, ListComponent, ContainerComponent, ExitComponent, FormComponent]
+  declarations: [
+    MainComponent, 
+    ListComponent, 
+    ContainerComponent, 
+    ExitComponent, 
+    FormComponent, 
+    FriendsComponent, 
+    FriendComponent
+  ]
 })
 export class AddingModule { }

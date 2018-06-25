@@ -1,0 +1,11 @@
+<p>
+  friends works!
+</p>
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center" 
+  *ngFor="let item of friendService.friendList, let i = index" (click)="editFriend(i)">{{item.nameFriend}}
+      <span class="badge badge-primary badge-pill" (click)="deleteInfoFriend(i)"><i class="fa fa-trash"></i></span>
+  </li>
+  
+</ul>
+
