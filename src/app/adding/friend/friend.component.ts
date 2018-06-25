@@ -21,6 +21,10 @@ export class FriendComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (JSON.parse(localStorage.getItem('friends')) !== null) {
+      this.friendService.friendList = JSON.parse(localStorage.getItem('friends'));
+    }
+
     let currentFriend = this.friendService.friendList[this.id];
     console.log(currentFriend);
     this.nameFriend = currentFriend['nameFriend'];

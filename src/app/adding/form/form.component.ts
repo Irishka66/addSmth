@@ -60,6 +60,6 @@ export class FormComponent implements OnInit {
   }
 
   clearFields() {
-
+    this.myForm.controls.friendName.value = '';
   }
 }
