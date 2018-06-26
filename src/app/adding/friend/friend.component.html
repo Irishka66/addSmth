@@ -14,22 +14,22 @@
         <input type="text" class="form-control" [(ngModel)]="id" name="friendId" disabled>
     </div>
     <div class="input-group mb-3">
-        <div class="input-group-prepend">
+        <div class="input-group-prepend prepend-field">
           <span class="input-group-text">Name</span>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="nameFriend" name="nameFriend" required pattern="^[a-zA-Z-\s]+$">
+        <input type="text" class="form-control form-control-field" [(ngModel)]="nameFriend" name="nameFriend" required pattern="^[a-zA-Z-\s]+$">
     </div>
     <div class="input-group mb-3">
-        <div class="input-group-prepend">
+        <div class="input-group-prepend prepend-field">
           <span class="input-group-text">Email</span>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="emailFriend" name="emailFriend" required email>
+        <input type="text" class="form-control form-control-field" [(ngModel)]="emailFriend" name="emailFriend" required email>
     </div>
     <div class="input-group mb-3">
-        <div class="input-group-prepend">
+        <div class="input-group-prepend prepend-field">
           <span class="input-group-text">Phone</span>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="phoneFriend" name="phoneFriend" pattern="^[ 0-9-]+$">
+        <input type="text" class="form-control form-control-field" [(ngModel)]="phoneFriend" name="phoneFriend" pattern="^[ 0-9-]+$">
     </div>
     <button class="btn btn-primary" routerLink="../../friends" [disabled]="friendForm.invalid">Save & Back to Friends</button>
   </form>

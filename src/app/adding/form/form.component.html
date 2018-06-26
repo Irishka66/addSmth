@@ -7,10 +7,10 @@
 <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
 
   <div class="input-group mb-3">
-    <div class="input-group-prepend">
+    <div class="input-group-prepend prepend-field">
         <span class="input-group-text">Name</span>
     </div>
-    <input type="text" class="form-control" name="name" formControlName="friendName" placeholder="enter name" />
+    <input type="text" class="form-control form-control-field" name="name" formControlName="friendName" placeholder="enter name" />
   </div>
   <div class="alert alert-danger form-alert"
          *ngIf="myForm.controls['friendName'].invalid && myForm.controls['friendName'].touched">
@@ -18,10 +18,10 @@
   </div>
 
   <div class="input-group mb-3">
-    <div class="input-group-prepend">
+    <div class="input-group-prepend prepend-field">
         <span class="input-group-text">Email</span>
     </div>
-    <input class="form-control" name="email" formControlName="friendEmail" placeholder="enter email"/>
+    <input class="form-control form-control-field" name="email" formControlName="friendEmail" placeholder="enter email"/>
   </div>
   <div class="alert alert-danger form-alert"
          *ngIf="myForm.controls['friendEmail'].invalid && myForm.controls['friendEmail'].touched">
@@ -29,10 +29,10 @@
   </div>
 
   <div class="input-group mb-3">
-    <div class="input-group-prepend">
+    <div class="input-group-prepend prepend-field">
         <span class="input-group-text">Phone number (optional)</span>
     </div>
-    <input class="form-control" name="phone" formControlName="friendPhone" placeholder="enter phone" />
+    <input class="form-control form-control-field" name="phone" formControlName="friendPhone" placeholder="enter phone" />
   </div>
 
   <div class="form-group">

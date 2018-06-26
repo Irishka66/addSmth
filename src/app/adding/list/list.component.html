@@ -1,13 +1,13 @@
-<!--<p>-->
-  <!--list works!-->
-<!--</p>-->
+<p>
+  list works!
+</p>
 
 <ul>
   <li *ngFor="let record of records, let i = index" class="tasks">
     <div class="input-group mb-3">
-      <div class="form-control" [ngClass]="{editable: i==iFromEdit}" [attr.contenteditable]="i==iFromEdit" 
+      <div class="form-control form-control-field" [ngClass]="{editable: i==iFromEdit}" [attr.contenteditable]="i==iFromEdit" 
           (blur)="blurFromRecord(i)" (click)="edit(i)">{{record['text']}}</div>
-      <div class="input-group-append">
+      <div class="input-group-append append-field">
         <!--we can get some value in parent from like()-->
         <button class="btn btn-outline-secondary" type="button" (click)="like(23)">+ karma</button>
         <button class="btn btn-outline-secondary" type="button" (click)="addSub(i)"><i class="fa fa-plus"></i></button>
@@ -24,9 +24,9 @@
 
         <div class="input-group mb-3 drag-block" ngDraggable (edge)="checkEdge($event)" [bounds]="myBounds" [inBounds]="inBounds"
              (started)="onStart($event)" (stopped)="onStop($event)" (endOffset)="onMoveEnd($event, i, j)">
-          <div class="form-control sub-task" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub), doneSub: dataService.arrAddedText[i]['subtree'][j]['done']}" [attr.contenteditable]="j==jFromEditSub" 
+          <div class="form-control form-control-field sub-task" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub), doneSub: dataService.arrAddedText[i]['subtree'][j]['done']}" [attr.contenteditable]="j==jFromEditSub" 
               (blur)="blurFromSubRecord(i, j)" (click)="editSub(i, j)">{{subTreeItem.subText}}</div>
-          <div class="input-group-append">
+          <div class="input-group-append append-field">
             <button class="btn btn-outline-secondary" type="button" (click)="editSub(i, j)"><i class="fa fa-edit"></i></button>
             <button class="btn btn-outline-secondary" type="button" (click)="doneSub(i, j)"><i class="fa fa-check"></i></button>
             <button class="btn btn-outline-secondary" type="button" (click)="deleteSub(i, j)"><i class="fa fa-trash"></i></button>
@@ -40,7 +40,6 @@
 </ul>
 
 <div class="done" *ngIf="dataService.arrDoneRecords[0]">Done:</div>
-
 <ul>
   <li *ngFor="let doneRecord of dataService.arrDoneRecords, let i = index">
     <div class="input-group mb-3">
