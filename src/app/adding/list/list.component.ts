@@ -52,8 +52,6 @@ export class ListComponent implements OnInit {
   }
 
   onMoveEnd(event, i, j) {
-    // debugger;
-
     this.endOffset.x = event.x;
     this.endOffset.y = event.y;
     let styleLiSub = getComputedStyle(document.getElementsByClassName('li-sub')[0]);
@@ -66,7 +64,7 @@ export class ListComponent implements OnInit {
       let subTree: Array<any> = [];
       let obj = {
         'indexRecord': indexRecord,
-        'text': this.dataService.arrAddedText[i]['subtree'][j] || 'Do smth usefull',
+        'text': this.dataService.arrAddedText[i]['subtree'][j]['subText'] || 'Do smth usefull',
         'subtree': subTree,
       };
       let obj1 = JSON.parse(JSON.stringify(obj));
@@ -91,10 +89,8 @@ export class ListComponent implements OnInit {
         this.dataService.arrAddedTextCopy.splice(m, 1);
       }
     }
-
     this.iFromEdit = -1;
     this.dataService.saveLocalRecords();
-
     this.dataService.arrDoneRecords.push(doneRecord[0]);
     this.dataService.saveLocalDoneRecords();
   }
@@ -121,13 +117,10 @@ export class ListComponent implements OnInit {
 
   blurFromRecord(i) {
     let editedRecord = document.getElementsByClassName("editable")['0'].innerText;
-    // console.log('editedRecord ' + editedRecord);
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
     let currentRecord = this.dataService.arrAddedText[i];
     currentRecord['text'] = editedRecord;
-
     let currentRecord1 = JSON.parse(JSON.stringify(currentRecord))
-
     this.dataService.arrAddedText.splice(i, 1, currentRecord);
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
@@ -142,18 +135,19 @@ export class ListComponent implements OnInit {
 
   addSub(i) {
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
-    // this.dataService.arrAddedText[i]['subtree'].push('Do a step');
-
+    let obj = {
+      'subText': 'Do smth',
+      'done': false
+    };
+    let obj1 = JSON.parse(JSON.stringify(obj));
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
-        this.dataService.arrAddedTextCopy[m]['subtree'].push('Do smth');
+        this.dataService.arrAddedTextCopy[m]['subtree'].push(obj1);
       }
     }
 
-    this.dataService.arrAddedText[i]['subtree'].push('Do smth');
-
-    console.log(this.dataService.arrAddedText);
+    this.dataService.arrAddedText[i]['subtree'].push(obj);
     this.dataService.saveLocalRecords();
   }
 
@@ -168,22 +162,41 @@ export class ListComponent implements OnInit {
     this.dataService.saveLocalRecords();
   }
 
+  doneSub(i, j) {
+    if (this.dataService.arrAddedText[i]['subtree'][j]['done'] === false) {
+      this.dataService.arrAddedText[i]['subtree'][j]['done'] = true;
+    } else {
+      this.dataService.arrAddedText[i]['subtree'][j]['done'] = false;
+    }
+
+    for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
+      if (this.dataService.arrAddedText[i]['indexRecord'] === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
+        if (this.dataService.arrAddedTextCopy[m]['subtree'][j]['done'] === false) {
+          this.dataService.arrAddedTextCopy[m]['subtree'][j]['done'] = true;
+        } else {
+          this.dataService.arrAddedTextCopy[m]['subtree'][j]['done'] = false;
+        }
+      }
+    }
+    this.dataService.saveLocalRecords();
+  }
+
   editSub(i, j) {
-    // debugger;
     this.jFromEditSub = j;
     this.iFromEditSub = i;
   }
 
   blurFromSubRecord(i, j) {
-    // debugger;
     let editedSubRecord = document.getElementsByClassName("editableSub")['0'].innerText;
     let currentIndex = this.dataService.arrAddedText[i]['indexRecord'];
-
-    this.dataService.arrAddedText[i]['subtree'].splice(j, 1, editedSubRecord);
+    let currentSubRecord = this.dataService.arrAddedText[i]['subtree'][j];
+    currentSubRecord['subText'] = editedSubRecord;
+    let currentSubRecord1 = JSON.parse(JSON.stringify(currentSubRecord));
+    this.dataService.arrAddedText[i]['subtree'].splice(j, 1, currentSubRecord);
 
     for (let m = 0; m < this.dataService.arrAddedTextCopy.length; m++) {
       if (currentIndex === this.dataService.arrAddedTextCopy[m]['indexRecord']) {
-        this.dataService.arrAddedTextCopy[m]['subtree'].splice(j, 1, editedSubRecord);
+        this.dataService.arrAddedTextCopy[m]['subtree'].splice(j, 1, currentSubRecord1);
       }
     }
 

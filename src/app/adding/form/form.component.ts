@@ -35,31 +35,48 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
-    // console.log(this.friendService.friendList);
-    // console.log(this.friendService.friendList['idFriend']);
-    // console.log(this.friendService.friendList.idFriend);
     let friendListLength = this.friendService.friendList.length;
     let i: number;
     console.log(friendListLength);
     if (friendListLength) {
-      i = this.friendService.friendList[friendListLength - 1]['idFriend'] + 1;
+      // i = this.friendService.friendList[friendListLength - 1]['idFriend'] + 1;
+      i = friendListLength;
     } else {
       i = 0;
     }
+
+    let nameFriendCapitalize = this.capitalizeFirstLetter(this.myForm.controls.friendName.value.trim());
+    console.log(nameFriendCapitalize);
+
     let obj = {
       'idFriend': i,
-      'nameFriend': this.myForm.controls.friendName.value,
-      'emailFriend': this.myForm.controls.friendEmail.value,
-      'phoneFriend': this.myForm.controls.friendPhone.value,
+      'nameFriend': nameFriendCapitalize,
+      'emailFriend': this.myForm.controls.friendEmail.value.trim(),
+      'phoneFriend': this.myForm.controls.friendPhone.value.trim(),
     };
     this.friendService.friendList.push(obj);
+
+
+    this.friendService.friendList.sort(this.compareNameFriend);
 
     this.friendService.saveLocalFriends();
     this.clearFields();
     console.log(this.friendService.friendList);
   }
 
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  compareNameFriend(a, b) {
+    if (a.nameFriend > b.nameFriend) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
   clearFields() {
-    this.myForm.controls.friendName.value = '';
+    this.myForm.reset();
   }
 }

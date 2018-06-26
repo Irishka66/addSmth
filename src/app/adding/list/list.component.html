@@ -3,7 +3,7 @@
 <!--</p>-->
 
 <ul>
-  <li *ngFor="let record of records, let i = index">
+  <li *ngFor="let record of records, let i = index" class="tasks">
     <div class="input-group mb-3">
       <div class="form-control" [ngClass]="{editable: i==iFromEdit}" [attr.contenteditable]="i==iFromEdit" 
           (blur)="blurFromRecord(i)" (click)="edit(i)">{{record['text']}}</div>
@@ -24,10 +24,11 @@
 
         <div class="input-group mb-3 drag-block" ngDraggable (edge)="checkEdge($event)" [bounds]="myBounds" [inBounds]="inBounds"
              (started)="onStart($event)" (stopped)="onStop($event)" (endOffset)="onMoveEnd($event, i, j)">
-          <div class="form-control" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub) }" [attr.contenteditable]="j==jFromEditSub" 
-              (blur)="blurFromSubRecord(i, j)" (click)="editSub(i, j)">{{subTreeItem}}</div>
+          <div class="form-control sub-task" [ngClass]="{editableSub: (j==jFromEditSub && i==iFromEditSub), doneSub: dataService.arrAddedText[i]['subtree'][j]['done']}" [attr.contenteditable]="j==jFromEditSub" 
+              (blur)="blurFromSubRecord(i, j)" (click)="editSub(i, j)">{{subTreeItem.subText}}</div>
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="editSub(i, j)"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-outline-secondary" type="button" (click)="doneSub(i, j)"><i class="fa fa-check"></i></button>
             <button class="btn btn-outline-secondary" type="button" (click)="deleteSub(i, j)"><i class="fa fa-trash"></i></button>
           </div>
         </div>
