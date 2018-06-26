@@ -3,30 +3,36 @@
 </p>
 <div class='friend-container'>
   <h2>Info about your friend</h2>
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Id</span>
-      </div>
-      <input type="text" class="form-control" [(ngModel)]="id" name="friendId" disabled>
-  </div>
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Name</span>
-      </div>
-      <input type="text" class="form-control" [(ngModel)]="nameFriend" name="nameFriend">
-  </div>
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Email</span>
-      </div>
-      <input type="text" class="form-control" [(ngModel)]="emailFriend" name="emailFriend">
-  </div>
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Phone</span>
-      </div>
-      <input type="text" class="form-control" [(ngModel)]="phoneFriend" name="phoneFriend">
-  </div>
-  <button class="btn btn-primary" routerLink="../../friends">Save & Back to Friends</button>
-  <!-- <button class="btn btn-primary" (click)="saveChanges()">Save changes</button> -->
+
+  <!-- <input class="form-control" name="email" formControlName="friendEmail" placeholder="enter email"/> -->
+
+  <form #friendForm="ngForm" novalidate>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Id</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="id" name="friendId" disabled>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Name</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="nameFriend" name="nameFriend" required pattern="^[a-zA-Z-\s]+$">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Email</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="emailFriend" name="emailFriend" required email>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Phone</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="phoneFriend" name="phoneFriend" pattern="^[ 0-9-]+$">
+    </div>
+    <button class="btn btn-primary" routerLink="../../friends" [disabled]="friendForm.invalid">Save & Back to Friends</button>
+  </form>
+
+
 </div>

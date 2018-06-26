@@ -4,10 +4,7 @@
 <ul class="list-group">
   <li class="list-group-item d-flex justify-content-between align-items-center" 
   *ngFor="let item of friendService.friendList, let i = index" (click)="editFriend(i)" [@friendState]="state">{{item.nameFriend}}
-      <span class="badge badge-primary badge-pill" (click)="deleteInfoFriend($event, i)"><i class="fa fa-trash"></i></span>
+      <span class="badge badge-primary badge-pill" (click)="deleteInfoFriend(i)"><i class="fa fa-trash"></i></span>
   </li>
   
 </ul>
-
-<!-- [@friendState]="state" -->
-<!-- iFromDelete==i?'active':'inactive' -->

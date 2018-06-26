@@ -11,10 +11,10 @@
         <span class="input-group-text">Name</span>
     </div>
     <input type="text" class="form-control" name="name" formControlName="friendName" placeholder="enter name" />
-    <div class="alert alert-danger"
+  </div>
+  <div class="alert alert-danger form-alert"
          *ngIf="myForm.controls['friendName'].invalid && myForm.controls['friendName'].touched">
       Please enter your name
-    </div>
   </div>
 
   <div class="input-group mb-3">
@@ -22,11 +22,10 @@
         <span class="input-group-text">Email</span>
     </div>
     <input class="form-control" name="email" formControlName="friendEmail" placeholder="enter email"/>
-
-    <div class="alert alert-danger"
+  </div>
+  <div class="alert alert-danger form-alert"
          *ngIf="myForm.controls['friendEmail'].invalid && myForm.controls['friendEmail'].touched">
       Incorrect email
-    </div>
   </div>
 
   <div class="input-group mb-3">

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import {FriendService} from '../../services/friend.service';
+import { NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-friend',
@@ -26,7 +27,7 @@ export class FriendComponent implements OnInit {
     }
 
     let currentFriend = this.friendService.friendList[this.id];
-    console.log(currentFriend);
+    // console.log(currentFriend);
     this.nameFriend = currentFriend['nameFriend'];
     this.emailFriend = currentFriend['emailFriend'];
     this.phoneFriend = currentFriend['phoneFriend'];
