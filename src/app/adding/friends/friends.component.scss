@@ -1,0 +1,30 @@
+.modal-delete {
+    position: absolute;
+    width: 250px;
+    padding: 4px;
+    top: 2px;
+    right: 3px;
+    background-color: rgb(221, 211, 211);
+    border-radius: 4px;
+    z-index: 1;
+    .modal-sure {
+        position: relative;
+        top: 5px;
+        left: 5px;
+    }
+}
+
+
+.modal-buttons {
+    float: right;
+    button {
+        border-radius: 4px;
+        padding: 5px;
+        &.yes {
+            background-color: #81d681;
+        }
+        &.no {
+            background-color: rgb(247, 73, 20);
+        }
+    }
+}
