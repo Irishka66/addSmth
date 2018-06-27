@@ -1,0 +1,15 @@
+<p>
+  chartjs works!
+</p>
+
+<div style="width: 80%; height: 300px">
+  <canvas
+      baseChart
+      [chartType]="'line'"
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [legend]="true"
+      (chartClick)="onChartClick($event)">
+  </canvas>
+</div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularDraggableModule } from 'angular2-draggable';
+import { ChartsModule } from 'ng2-charts';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -14,6 +15,9 @@ import { ExitComponent } from './exit/exit.component';
 import { FormComponent } from './form/form.component';
 import { FriendsComponent } from './friends/friends.component';
 import { FriendComponent } from './friend/friend.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ChartjsComponent } from './statistics/chartjs/chartjs.component';
 
 @NgModule({
   imports: [
@@ -21,7 +25,9 @@ import { FriendComponent } from './friend/friend.component';
     AddingRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularDraggableModule
+    AngularDraggableModule,
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [
   ],
@@ -32,7 +38,9 @@ import { FriendComponent } from './friend/friend.component';
     ExitComponent, 
     FormComponent, 
     FriendsComponent, 
-    FriendComponent
+    FriendComponent, 
+    StatisticsComponent, 
+    ChartjsComponent
   ]
 })
 export class AddingModule { }

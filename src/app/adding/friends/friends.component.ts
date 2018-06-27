@@ -20,8 +20,8 @@ import {
       style({
       })),
       transition('* => void', [
-        animate('400ms ease-in', style({
-          transform: 'scale(0.5)',
+        animate('200ms ease-in', style({
+          transform: 'scale(0.8)',
           opacity: 0
         }))
       ]),
@@ -32,10 +32,10 @@ import {
       })),
       transition('void => *', [
         style({
-          transform: 'scale(0.5)',
+          transform: 'scale(0.8)',
           opacity: 0
         }),
-        animate('400ms ease-in')
+        animate('200ms ease-in')
       ]),
     ]),
     

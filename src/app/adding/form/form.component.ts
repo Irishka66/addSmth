@@ -35,17 +35,8 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
-    // let friendListLength = this.friendService.friendList.length;
     let indexFriend: string = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
-    // let indexRecord: string = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
-    // console.log(friendListLength);
-    // if (friendListLength) {
-    //   // i = this.friendService.friendList[friendListLength - 1]['idFriend'] + 1;
-    //   i = friendListLength;
-    // } else {
-    //   i = 0;
-    // }
-
+    
     let nameFriendCapitalize = this.capitalizeFirstLetter(this.myForm.controls.friendName.value.trim());
     console.log(nameFriendCapitalize);
 

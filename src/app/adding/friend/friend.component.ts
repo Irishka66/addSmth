@@ -34,10 +34,24 @@ export class FriendComponent implements OnInit {
   }
 
   saveChanges() {
-    this.friendService.friendList[this.id]['nameFriend'] = this.nameFriend;
+    this.friendService.friendList[this.id]['nameFriend'] = this.capitalizeFirstLetter(this.nameFriend.trim());
     this.friendService.friendList[this.id]['emailFriend'] = this.emailFriend;
     this.friendService.friendList[this.id]['phoneFriend'] = this.phoneFriend;
+
+    this.friendService.friendList.sort(this.compareNameFriend);
     this.friendService.saveLocalFriends();
+  }
+
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  compareNameFriend(a, b) {
+    if (a.nameFriend > b.nameFriend) {
+      return 1;
+    } else {
+      return -1;
+    }
   }
 
   ngOnDestroy() {
