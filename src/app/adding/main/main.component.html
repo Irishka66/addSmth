@@ -3,7 +3,8 @@
 </p>
 
 <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="write smth" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="addedText" name="addedText">
+  <input type="text" class="form-control" placeholder="write smth"  
+    [(ngModel)]="addedText" name="addedText">
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" (click)="add()"><i class="fa fa-plus"></i></button>
   </div>
@@ -12,8 +13,8 @@
 <div>Search smth:</div>
 
 <div class="input-group mb-3">
-  <input #inputField type="text" class="form-control" placeholder="search smth" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchText" name="searchText"
-         (input)="search(inputField.value)" >
+  <input #inputField type="text" class="form-control" placeholder="search smth" 
+    [(ngModel)]="searchText" name="searchText" (input)="search(inputField.value)" >
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" (click)="clearSearchText()"><i class="fa fa-eraser"></i></button>
   </div>

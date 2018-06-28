@@ -14,13 +14,31 @@ export class ChartjsComponent implements OnInit {
   }
 
   chartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+        // yAxes: [{
+        //   ticks: {
+        //     beginAtZero: true,
+        //     callback: label => `${label}%`
+        //   }
+        // }],
+        xAxes: [{
+            // type: 'time',
+            // time: {
+            //     unit: 'day',
+            //     unitStepSize: 1,
+            //     displayFormats: {
+            //         'day': 'MMM DD'
+            //     }
+            // }
+        }]
+      }
   };
 
   chartData = [
-    { data: [330, 600, 260, 700], label: 'Account A' },
-    { data: [120, 455, 100, 340], label: 'Account B' },
-    { data: [45, 67, 800, 500], label: 'Account C' }
+    { data: [330, 600, 260, 700], label: 'Click 1' },
+    { data: [120, 455, 100, 340], label: 'Click 2' },
+    { data: [45, 67, 800, 500], label: 'Click 3' }
   ];
 
   chartLabels = ['January', 'February', 'March', 'April'];
