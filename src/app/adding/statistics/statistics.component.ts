@@ -14,7 +14,6 @@ export class StatisticsComponent implements OnInit {
   ngOnInit() {
   }
 
-  help: number = 1;
   addedDay: number = 1;
 
   click1() {
@@ -24,14 +23,11 @@ export class StatisticsComponent implements OnInit {
     }
     this.statisticsService.arrClick1.push(obj);
     console.log(this.statisticsService.arrClick1);
-    // this.help = this.help + 2;
     
-
     let random = Math.floor(Math.random() * 10);
     let helpRandom = random > 3 ? 0 : random;  
-    console.log('helpRandom ' + helpRandom);
     this.addedDay = this.addedDay + helpRandom;
-    console.log('addedDay ' + helpRandom);
+    
     this.setChartArr1();
   }
 
@@ -41,27 +37,16 @@ export class StatisticsComponent implements OnInit {
     let firstYear = this.statisticsService.arrClick1[0]['time'].getFullYear();
     let firstMonth = this.statisticsService.arrClick1[0]['time'].getMonth();
     let firstDay = this.statisticsService.arrClick1[0]['time'].getDate();
-    console.log('firstDate ' + firstDate);
-    // console.log(firstYear);
-    // console.log(firstMonth);
-    // console.log(firstDay);
+   
     let lastDate = this.statisticsService.arrClick1[length - 1]['time'];
     let lastYear = this.statisticsService.arrClick1[length - 1]['time'].getFullYear();
     let lastMonth = this.statisticsService.arrClick1[length - 1]['time'].getMonth();
     let lastDay = this.statisticsService.arrClick1[length - 1]['time'].getDate();
-    console.log('lastDate ' + lastDate);
-    // console.log(lastYear);
-    // console.log(lastMonth);
-    // console.log(lastDay);
     
-    let start = new Date(firstYear, firstMonth, firstDay);
-    console.log('start ' + start);
-    let finish = new Date(lastYear, lastMonth, lastDay + 1);
-    console.log('finish ' + finish);
+    let start: any = new Date(firstYear, firstMonth, firstDay);
+    let finish: any = new Date(lastYear, lastMonth, lastDay + 1);
     let period = (finish - start) / 86400000;
-    console.log('period ' + period);
     
-    // let i = 0;
     let clicks = 0;
     let arrChart: Array<any> = [];
     let jj: number = 0;
@@ -71,37 +56,31 @@ export class StatisticsComponent implements OnInit {
     for (let i = 0; i < period; i++) {
       clicks = 0;
       for (j = jj; j < this.statisticsService.arrClick1.length; j++) {
-        if (this.statisticsService.arrClick1[j]['time'] > new Date(firstYear, firstMonth, firstDay + i) && 
+        if (this.statisticsService.arrClick1[j]['time'] >= new Date(firstYear, firstMonth, firstDay + i) && 
             this.statisticsService.arrClick1[j]['time'] < new Date(firstYear, firstMonth, firstDay + i + 1)) {
             clicks ++;
             arrChart[i] = {
               'numberOfClicks': clicks,
               'date': new Date(firstYear, firstMonth, firstDay + i)
             }
-        } else if (this.statisticsService.arrClick1[j]['time'] > new Date(firstYear, firstMonth, firstDay + i + 1) && 
+        } else if (this.statisticsService.arrClick1[j]['time'] >= new Date(firstYear, firstMonth, firstDay + i + 1) && 
                    this.statisticsService.arrClick1[j]['time'] < new Date(firstYear, firstMonth, firstDay + i + 2)) {
-
-
                     jj = j;
                     break;
         } else {
           arrChart[i+1] = {
             'numberOfClicks': 0,
-            'date': new Date(firstYear, firstMonth, firstDay + i)
+            'date': new Date(firstYear, firstMonth, firstDay + i + 1)
           };
-          i++;
           jj = j;
           break;
         }
-      
-      
-      
       }
-
     }
 
-  console.log(arrChart);
-    
+    console.log(arrChart);
+    this.statisticsService.arrChart1 = arrChart;
+    this.statisticsService.fillChartData();
   }
 
   click2() {

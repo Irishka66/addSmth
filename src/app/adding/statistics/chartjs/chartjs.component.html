@@ -2,6 +2,8 @@
   chartjs works!
 </p>
 
+<!-- <div [ngClass]="{wtf: statisticsService.flag}">Flag</div> -->
+
 <div style="width: 80%">
   <canvas
       baseChart
@@ -13,3 +15,7 @@
       (chartClick)="onChartClick($event)">
   </canvas>
 </div>
+
+
+<div>{{statisticsService.chartData}}</div>
+<div>{{statisticsService.chartLabels}}</div>
