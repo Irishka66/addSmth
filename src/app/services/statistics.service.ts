@@ -11,58 +11,62 @@ export class StatisticsService {
   arrClick3: Array<any> = [];
 
   arrChart1: Array<any> = [];
-  arrChartData: Array<any> = [];
-  arrChartLabels: Array<any> = [];
+  arrChart2: Array<any> = [];
+  arrChart3: Array<any> = [];
 
-  // chartData: Array<any> = [];
-  // chartLabels: Array<any> = [];
-
-  // flag: boolean = true;
+  resArr1: Array<any> = [];
+  resArr2: Array<any> = [];
+  resArr3: Array<any> = [];
 
   constructor() { }
 
-  // chartData = [
-  //   { data: [2, 3], label: 'Click 1' }
-  // ];
+  public chart1ConfigSubject = new Subject();
+  public chart1ConfigStream$ = this.chart1ConfigSubject.asObservable();
 
-  // chartLabels: Array<any> = ['may', 'june'];
+  public chart2ConfigSubject = new Subject();
+  public chart2ConfigStream$ = this.chart2ConfigSubject.asObservable();
+
+  public chart3ConfigSubject = new Subject();
+  public chart3ConfigStream$ = this.chart3ConfigSubject.asObservable();
 
   public chartConfigSubject = new Subject();
   public chartConfigStream$ = this.chartConfigSubject.asObservable();
 
-  // this method controls changes in edit.component
-  public setConfigStyle(objEdits) {
-    this.chartConfigSubject.next(objEdits);
+  fillChartData1(arrChart) {
+    this.resArr1 = this.fillChartData(arrChart);
+    // this.chart1ConfigSubject.next(this.resArr1);
+    this.fillTotalArr();
   }
 
-  fillChartData() {
-    this.arrChartData = [];
-    this.arrChartLabels = [];
-    for (let i = 0; i < this.arrChart1.length; i++) {
-      this.arrChartData.push(this.arrChart1[i]['numberOfClicks']);
-      let str = this.arrChart1[i]['date'] + '';
-      this.arrChartLabels.push(str);
+  fillChartData2(arrChart) {
+    this.resArr2 = this.fillChartData(arrChart);
+    // this.chart1ConfigSubject.next(this.resArr2);
+    this.fillTotalArr();
+  }
+
+  fillChartData3(arrChart) {
+    this.resArr3 = this.fillChartData(arrChart);
+    // this.chart1ConfigSubject.next(this.resArr3);
+    this.fillTotalArr();
+  }
+
+  fillTotalArr() {
+    let totalArr = [this.resArr1, this.resArr2, this.resArr3];
+    console.log(totalArr);
+    this.chartConfigSubject.next(totalArr);
+  }
+
+  fillChartData(arrChart) {
+    console.log(arrChart.length);
+    let arrChartData: Array<any> = [];
+    let arrChartLabels: Array<any> = [];
+    for (let i = 0; i < arrChart.length; i++) {
+      arrChartData.push(arrChart[i]['numberOfClicks']);
+      let str = arrChart[i]['date'] + '';
+      arrChartLabels.push(str);
     }
-    console.log(this.arrChartData);
-    console.log(this.arrChartLabels);
-
-    let arr: Array<any> = [this.arrChartData, this.arrChartLabels];
+    let arr: Array<any> = [arrChartData, arrChartLabels];
     console.log(arr);
-
-    this.chartConfigSubject.next(arr);
-
-    // this.chartData = [
-    //   { data: this.arrChartData, label: 'Click 1' }
-    // ];
-    // this.chartLabels = this.arrChartLabels;
-    // this.chartData = [
-    //   { data: [6, 1, 0, 0, 3, 1, 0, 4, 0, 2], label: 'Click 1' }
-    // ];
-    // this.chartLabels = ['Thu Mar 01 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Fri Mar 02 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Sat Mar 03 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Sun Mar 04 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Mon Mar 05 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Tue Mar 06 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Wed Mar 07 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Thu Mar 08 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Fri Mar 09 2001 00:00:00 GMT+0300 (Belarus Standard Time)', 'Sat Mar 10 2001 00:00:00 GMT+0300 (Belarus Standard Time)'];
-
-    // console.log(this.chartData);
-
-    // console.log(this.flag);
-    // this.flag = !this.flag;
+    return(arr);
   }
 }
