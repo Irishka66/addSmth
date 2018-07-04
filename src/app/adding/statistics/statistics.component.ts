@@ -85,7 +85,6 @@ export class StatisticsComponent implements OnInit {
     let jj: number = 0;
     let j: number;
 
-    // debugger;
     for (let i = 0; i < period; i++) {
       clicks = 0;
       for (j = jj; j < arrClick.length; j++) {
@@ -120,7 +119,7 @@ export class StatisticsComponent implements OnInit {
     }
     // console.log(arrChart);
     // return arrChart;
-    console.log(arrChartXY);
+    // console.log(arrChartXY);
     return arrChartXY;
 
   }

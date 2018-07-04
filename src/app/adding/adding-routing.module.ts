@@ -7,6 +7,7 @@ import {FormComponent} from './form/form.component';
 import {FriendsComponent} from './friends/friends.component';
 import {FriendComponent} from './friend/friend.component';
 import {StatisticsComponent} from './statistics/statistics.component';
+import {MapComponent} from './map/map.component';
 
 //  I need this code to apply lazy-loading
 const routes: Routes = [
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent,
+      },
+      {
+        path: 'map',
+        component: MapComponent,
       },
     ]
   }

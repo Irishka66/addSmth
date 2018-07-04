@@ -9,14 +9,10 @@ export class StatisticsService {
   arrClick1: Array<any> = [];
   arrClick2: Array<any> = [];
   arrClick3: Array<any> = [];
-
-  arrChart1: Array<any> = [];
-  arrChart2: Array<any> = [];
-  arrChart3: Array<any> = [];
-
   resArr1: Array<any> = [];
   resArr2: Array<any> = [];
   resArr3: Array<any> = [];
+  totalArr: Array<any> = [];
 
   constructor() { }
 
@@ -42,22 +38,22 @@ export class StatisticsService {
   }
 
   fillTotalArr() {
-    let totalArr = [this.resArr1, this.resArr2, this.resArr3];
-    console.log(totalArr);
-    this.chartConfigSubject.next(totalArr);
+    this.totalArr = [this.resArr1, this.resArr2, this.resArr3];
+    // console.log(totalArr);
+    this.chartConfigSubject.next(this.totalArr);
   }
 
-  fillChartData(arrChart) {
-    console.log(arrChart);
-    // let arrChartData: Array<any> = [];
-    // let arrChartLabels: Array<any> = [];
-    // for (let i = 0; i < arrChart.length; i++) {
-    //   arrChartData.push(arrChart[i]['numberOfClicks']);
-    //   let str = arrChart[i]['date'] + '';
-    //   arrChartLabels.push(str);
-    // }
-    // let arr: Array<any> = [arrChartData, arrChartLabels];
-    // console.log(arr);
-    // return(arr);
-  }
+  // fillChartData(arrChart) {
+  //   console.log(arrChart);
+  //   let arrChartData: Array<any> = [];
+  //   let arrChartLabels: Array<any> = [];
+  //   for (let i = 0; i < arrChart.length; i++) {
+  //     arrChartData.push(arrChart[i]['numberOfClicks']);
+  //     let str = arrChart[i]['date'] + '';
+  //     arrChartLabels.push(str);
+  //   }
+  //   let arr: Array<any> = [arrChartData, arrChartLabels];
+  //   console.log(arr);
+  //   return(arr);
+  // }
 }

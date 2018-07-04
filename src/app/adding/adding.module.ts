@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgmCoreModule } from '@agm/core';
 
 
 import { AddingRoutingModule } from './adding-routing.module';
@@ -18,6 +19,7 @@ import { FriendComponent } from './friend/friend.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartjsComponent } from './statistics/chartjs/chartjs.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   imports: [
@@ -27,7 +29,12 @@ import { ChartjsComponent } from './statistics/chartjs/chartjs.component';
     ReactiveFormsModule,
     AngularDraggableModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      apiKey: 'AIzaSyAlenxL8PgvqMC7pml3z24r2eewHa3f6rU'
+    })
   ],
   providers: [
   ],
@@ -40,7 +47,7 @@ import { ChartjsComponent } from './statistics/chartjs/chartjs.component';
     FriendsComponent, 
     FriendComponent, 
     StatisticsComponent, 
-    ChartjsComponent
+    ChartjsComponent, MapComponent
   ]
 })
 export class AddingModule { }

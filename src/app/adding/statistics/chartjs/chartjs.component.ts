@@ -11,15 +11,18 @@ export class ChartjsComponent implements OnInit {
   constructor(private statisticsService: StatisticsService) { }
 
   ngOnInit() {
-    this.statisticsService.chartConfigStream$.subscribe((totalArr) => {
+    this.chartData = [
+      { data: this.statisticsService.totalArr[0] || [], label: 'Click 1' },
+      { data: this.statisticsService.totalArr[1] || [], label: 'Click 2' },
+      { data: this.statisticsService.totalArr[2] || [], label: 'Click 3' },
+    ];
 
-        // setTimeout(() => {
+    this.statisticsService.chartConfigStream$.subscribe((totalArr) => {
           this.chartData = [
             { data: totalArr[0], label: 'Click 1' },
             { data: totalArr[1], label: 'Click 2' },
             { data: totalArr[2], label: 'Click 3' },
           ];
-        // }, 50);
 
       // setTimeout(() => {
       //   let dateStart: Array<any>= [];
@@ -35,38 +38,31 @@ export class ChartjsComponent implements OnInit {
       //   }
       //   let dateStartFilter: Array<any>= [];
       //   let dateFinishFilter: Array<any>= [];
-
       //   dateStartFilter = dateStart.filter((item) => {
       //     return item !== 0;
       //   });
       //   dateFinishFilter = dateFinish.filter((item) => {
       //     return item !== 0;
       //   });
-
       //   console.log(dateStartFilter);
       //   console.log(dateFinishFilter);
-
       //   let minDateStart: any = new Date(dateStartFilter[0]);
       //   for (let i = 1; i < dateStartFilter.length; i++) {
       //     if (new Date(dateStartFilter[i]) < minDateStart) {
       //       minDateStart = new Date(dateStartFilter[i]);
       //     } 
       //   }
-
       //   let maxDateFinish: any = new Date(dateFinishFilter[0]);
       //   for (let k = 1; k < dateFinishFilter.length; k++) {
       //     if (new Date(dateFinishFilter[k]) > maxDateFinish) {
       //       maxDateFinish = new Date(dateFinishFilter[k]);
       //     } 
       //   }
-
       //   console.log(minDateStart);
       //   console.log(maxDateFinish);
-
       //   let totalPeriod: any = (maxDateFinish - minDateStart)/86400000 + 1;
       //   console.log(totalPeriod);
       //   let totalLabels: Array<any> = [];
-
       //   for (let j =0; j < totalPeriod; j++) {
       //     totalLabels.push(minDateStart);
       //     let year = minDateStart.getFullYear();
@@ -75,11 +71,7 @@ export class ChartjsComponent implements OnInit {
       //     minDateStart = new Date(year, month, day + 1);
       //   }
       //   console.log(totalLabels);
-
-
-      //   // this.chartLabels = ["Thu Mar 01 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Fri Mar 02 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Sat Mar 03 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Sun Mar 04 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Mon Mar 05 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Tue Mar 06 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Wed Mar 07 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Thu Mar 08 2001 00:00:00 GMT+0300 (Belarus Standard Time)"];
       //   this.chartLabels = totalLabels;
-
       // }, 50);
     });
 
