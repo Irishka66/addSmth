@@ -9,7 +9,7 @@
       baseChart
       [chartType]="'line'"
       [datasets]="chartData"
-      [labels]="chartLabels"
+      
       [options]="chartOptions"
       [legend]="true"
       (chartClick)="onChartClick($event)">
@@ -19,3 +19,5 @@
 
 <div>{{statisticsService.chartData}}</div>
 <div>{{statisticsService.chartLabels}}</div>
+
+<!-- [labels]="chartLabels" -->

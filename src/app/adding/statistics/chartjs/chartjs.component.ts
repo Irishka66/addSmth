@@ -12,91 +12,75 @@ export class ChartjsComponent implements OnInit {
 
   ngOnInit() {
     this.statisticsService.chartConfigStream$.subscribe((totalArr) => {
-      setTimeout(() => {
-        this.chartData = [
-          { data: totalArr[0][0] || [], label: 'Click 1' },
-          { data: totalArr[1][0] || [], label: 'Click 2' },
-          { data: totalArr[2][0] || [], label: 'Click 3' },
-        ];
-      }, 50);
-      setTimeout(() => {
 
-        let dateStart1: any = totalArr[0][1] ? new Date(totalArr[0][1][0]) : '';
-        let dateFinish1: any = totalArr[0][1] ? new Date(totalArr[0][1][totalArr[0][1].length - 1]) : '';
-        console.log(dateStart1);
-        console.log(dateFinish1);
-        let dateStart2: any = totalArr[1][1] ? new Date(totalArr[1][1][0]) : '';
-        let dateFinish2: any = totalArr[1][1] ? new Date(totalArr[1][1][totalArr[1][1].length - 1]) : '';
-        console.log(dateStart2);
-        console.log(dateFinish2);
-        let dateStart3: any = totalArr[2][1] ? new Date(totalArr[2][1][0]) : '';
-        let dateFinish3: any = totalArr[2][1] ? new Date(totalArr[2][1][totalArr[2][1].length - 1]) : '';
-        console.log(dateStart3);
-        console.log(dateFinish3);
+        // setTimeout(() => {
+          this.chartData = [
+            { data: totalArr[0], label: 'Click 1' },
+            { data: totalArr[1], label: 'Click 2' },
+            { data: totalArr[2], label: 'Click 3' },
+          ];
+        // }, 50);
 
-        // var dateFinish1: any = new Date("Fri Mar 02 2001 00:00:00 GMT+0300 (Belarus Standard Time)");
-        // console.log(dateStart1);
-        // console.log(date2);
-        // console.log((date2 - date1)/86400000);
-        let min: any;
-        let max: any;
+      // setTimeout(() => {
+      //   let dateStart: Array<any>= [];
+      //   let dateFinish: Array<any>= [];
+      //   for (let j = 0; j < 3; j++) {
+      //     if (totalArr[j][1]) {
+      //       dateStart[j] = totalArr[j][1][0];
+      //       dateFinish[j] = totalArr[j][1][totalArr[j][1].length - 1];
+      //     } else {
+      //       dateStart[j] = 0;
+      //       dateFinish[j] = 0;
+      //     }
+      //   }
+      //   let dateStartFilter: Array<any>= [];
+      //   let dateFinishFilter: Array<any>= [];
 
-        for (let j = 0; j < 2; j++) {
-          if (!totalArr[j][1]) {
-            continue;
-          }
-          let dateStart01 = new Date(totalArr[j][1][0]);
-          let dateFinish01 = new Date(totalArr[j][1][totalArr[j][1].length - 1]);
-          if (!totalArr[j + 1][1]) {
-            min = dateStart01;
-            max = dateFinish01;
-            continue;
-          }
-          // let dateStart01 = new Date(totalArr[j][1][0]);
-          let dateStart02 = new Date(totalArr[j + 1][1][0]);
-          if (dateStart01 < dateStart02) {
-            min = dateStart01;
-          } else {
-            min = dateStart02;
-          }
+      //   dateStartFilter = dateStart.filter((item) => {
+      //     return item !== 0;
+      //   });
+      //   dateFinishFilter = dateFinish.filter((item) => {
+      //     return item !== 0;
+      //   });
 
-          // let dateFinish01 = new Date(totalArr[j][1][totalArr[j][1].length - 1]);
-          let dateFinish02 = new Date(totalArr[j + 1][1][totalArr[j + 1][1].length - 1]);
-          if (dateFinish01 > dateFinish02) {
-            max = dateFinish01;
-          } else {
-            max = dateFinish02;
-          }
-        }
+      //   console.log(dateStartFilter);
+      //   console.log(dateFinishFilter);
 
-        console.log('min ' + min);
-        console.log('max ' + max);
+      //   let minDateStart: any = new Date(dateStartFilter[0]);
+      //   for (let i = 1; i < dateStartFilter.length; i++) {
+      //     if (new Date(dateStartFilter[i]) < minDateStart) {
+      //       minDateStart = new Date(dateStartFilter[i]);
+      //     } 
+      //   }
 
+      //   let maxDateFinish: any = new Date(dateFinishFilter[0]);
+      //   for (let k = 1; k < dateFinishFilter.length; k++) {
+      //     if (new Date(dateFinishFilter[k]) > maxDateFinish) {
+      //       maxDateFinish = new Date(dateFinishFilter[k]);
+      //     } 
+      //   }
 
-        // let minDate: any = new Date(Math.min(dateStart1, dateStart2, dateStart3));
-        // let maxDate: any = new Date(Math.max(dateFinish1, dateFinish2, dateFinish3));
-        // console.log('min ' + minDate);
-        // console.log('max ' + maxDate);
+      //   console.log(minDateStart);
+      //   console.log(maxDateFinish);
 
-        // let totalPeriod: any = (maxDate - minDate)/86400000 + 1;
-        // console.log(totalPeriod);
-        // let totalLabels: Array<any> = [];
+      //   let totalPeriod: any = (maxDateFinish - minDateStart)/86400000 + 1;
+      //   console.log(totalPeriod);
+      //   let totalLabels: Array<any> = [];
 
-        // for (let j =0; j < totalPeriod; j++) {
-        //   totalLabels.push(minDate);
-
-        //   let year = minDate.getFullYear();
-        //   let month = minDate.getMonth();
-        //   let day = minDate.getDate();
-
-        //   minDate = new Date(year, month, day + 1);
-        //   console.log(totalLabels);
-        // }
+      //   for (let j =0; j < totalPeriod; j++) {
+      //     totalLabels.push(minDateStart);
+      //     let year = minDateStart.getFullYear();
+      //     let month = minDateStart.getMonth();
+      //     let day = minDateStart.getDate();
+      //     minDateStart = new Date(year, month, day + 1);
+      //   }
+      //   console.log(totalLabels);
 
 
+      //   // this.chartLabels = ["Thu Mar 01 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Fri Mar 02 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Sat Mar 03 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Sun Mar 04 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Mon Mar 05 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Tue Mar 06 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Wed Mar 07 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Thu Mar 08 2001 00:00:00 GMT+0300 (Belarus Standard Time)"];
+      //   this.chartLabels = totalLabels;
 
-        this.chartLabels = ["Thu Mar 01 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Fri Mar 02 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Sat Mar 03 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Sun Mar 04 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Mon Mar 05 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Tue Mar 06 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Wed Mar 07 2001 00:00:00 GMT+0300 (Belarus Standard Time)", "Thu Mar 08 2001 00:00:00 GMT+0300 (Belarus Standard Time)"];
-      }, 50);
+      // }, 50);
     });
 
   }

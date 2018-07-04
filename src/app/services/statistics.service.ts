@@ -20,33 +20,24 @@ export class StatisticsService {
 
   constructor() { }
 
-  public chart1ConfigSubject = new Subject();
-  public chart1ConfigStream$ = this.chart1ConfigSubject.asObservable();
-
-  public chart2ConfigSubject = new Subject();
-  public chart2ConfigStream$ = this.chart2ConfigSubject.asObservable();
-
-  public chart3ConfigSubject = new Subject();
-  public chart3ConfigStream$ = this.chart3ConfigSubject.asObservable();
-
   public chartConfigSubject = new Subject();
   public chartConfigStream$ = this.chartConfigSubject.asObservable();
 
   fillChartData1(arrChart) {
-    this.resArr1 = this.fillChartData(arrChart);
-    // this.chart1ConfigSubject.next(this.resArr1);
+    // this.resArr1 = this.fillChartData(arrChart);
+    this.resArr1 = arrChart;
     this.fillTotalArr();
   }
 
   fillChartData2(arrChart) {
-    this.resArr2 = this.fillChartData(arrChart);
-    // this.chart1ConfigSubject.next(this.resArr2);
+    // this.resArr2 = this.fillChartData(arrChart);
+    this.resArr2 = arrChart;
     this.fillTotalArr();
   }
 
   fillChartData3(arrChart) {
-    this.resArr3 = this.fillChartData(arrChart);
-    // this.chart1ConfigSubject.next(this.resArr3);
+    // this.resArr3 = this.fillChartData(arrChart);
+    this.resArr3 = arrChart;
     this.fillTotalArr();
   }
 
@@ -57,16 +48,16 @@ export class StatisticsService {
   }
 
   fillChartData(arrChart) {
-    console.log(arrChart.length);
-    let arrChartData: Array<any> = [];
-    let arrChartLabels: Array<any> = [];
-    for (let i = 0; i < arrChart.length; i++) {
-      arrChartData.push(arrChart[i]['numberOfClicks']);
-      let str = arrChart[i]['date'] + '';
-      arrChartLabels.push(str);
-    }
-    let arr: Array<any> = [arrChartData, arrChartLabels];
-    console.log(arr);
-    return(arr);
+    console.log(arrChart);
+    // let arrChartData: Array<any> = [];
+    // let arrChartLabels: Array<any> = [];
+    // for (let i = 0; i < arrChart.length; i++) {
+    //   arrChartData.push(arrChart[i]['numberOfClicks']);
+    //   let str = arrChart[i]['date'] + '';
+    //   arrChartLabels.push(str);
+    // }
+    // let arr: Array<any> = [arrChartData, arrChartLabels];
+    // console.log(arr);
+    // return(arr);
   }
 }

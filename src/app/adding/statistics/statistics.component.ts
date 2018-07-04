@@ -81,6 +81,7 @@ export class StatisticsComponent implements OnInit {
     
     let clicks = 0;
     let arrChart: Array<any> = [];
+    let arrChartXY: Array<any> = [];
     let jj: number = 0;
     let j: number;
 
@@ -95,6 +96,10 @@ export class StatisticsComponent implements OnInit {
               'numberOfClicks': clicks,
               'date': new Date(firstYear, firstMonth, firstDay + i)
             }
+            arrChartXY[i] = {
+              x: new Date(firstYear, firstMonth, firstDay + i),
+              y: clicks 
+            }
         } else if (arrClick[j]['time'] >= new Date(firstYear, firstMonth, firstDay + i + 1) && 
                    arrClick[j]['time'] < new Date(firstYear, firstMonth, firstDay + i + 2)) {
                     jj = j;
@@ -104,13 +109,20 @@ export class StatisticsComponent implements OnInit {
             'numberOfClicks': 0,
             'date': new Date(firstYear, firstMonth, firstDay + i + 1)
           };
+          arrChartXY[i+1] = {
+            x: new Date(firstYear, firstMonth, firstDay + i + 1),
+            y: 0
+          };
           jj = j;
           break;
         }
       }
     }
-    console.log(arrChart);
-    return arrChart;
+    // console.log(arrChart);
+    // return arrChart;
+    console.log(arrChartXY);
+    return arrChartXY;
+
   }
 
   
