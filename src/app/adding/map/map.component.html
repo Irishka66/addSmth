@@ -1,8 +1,8 @@
 <p>
   map works!
 </p>
-<h1>Angular Google Maps (AGM) Demo</h1>
-<p><a href="https://angular-maps.com/" target="_blank">Official Website</a></p>
+<!-- <h1>Angular Google Maps (AGM) Demo</h1>
+<p><a href="https://angular-maps.com/" target="_blank">Official Website</a></p> -->
 
 <agm-map 
   [latitude]="lat"
@@ -14,7 +14,7 @@
 
   <agm-marker 
       *ngFor="let m of markers; let i = index"
-      (markerClick)="clickedMarker(m.label, i)"
+      (markerClick)="clickedMarker(m, i)"
       [latitude]="m.lat"
       [longitude]="m.lng"
       [label]="m.label"
@@ -22,16 +22,22 @@
       (dragEnd)="markerDragEnd(m, $event)">
       
     <agm-info-window>
-      <strong>InfoWindow content</strong>
+      <!-- <strong>{{description[i]['text']}}</strong> -->
+      <!-- <input class="agm-info-window-input" [placeholder]="description[i]['text']"> -->
+      <div class="agm-info_text" contenteditable="true">{{description[i]['text']}}</div>
+      <img *ngIf="imgShow[i]">
+      <button (click)="saveDescrChanges($event ,i)"><i class="fa fa-save"></i></button>
+      <button (click)="addImg(i)"><i class="fa fa-plus"></i> img</button>
+      <button (click)="deleteDescr(i)"><i class="fa fa-trash"></i></button>
     </agm-info-window>
     
   </agm-marker>
   
-  <agm-circle [latitude]="lat + 0.4" [longitude]="lng" 
+  <!-- <agm-circle [latitude]="lat" [longitude]="lng" 
       [radius]="5000"
       [fillColor]="'red'"
       [circleDraggable]="true"
       [editable]="true">
-  </agm-circle>
+  </agm-circle> -->
 
 </agm-map>

@@ -33,7 +33,7 @@ import { MapComponent } from './map/map.component';
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-      apiKey: 'AIzaSyAlenxL8PgvqMC7pml3z24r2eewHa3f6rU'
+      apiKey: 'AIzaSyDVqaVvcwKmNQViNMxr09YxsJjiKBWemY8'
     })
   ],
   providers: [
@@ -51,3 +51,4 @@ import { MapComponent } from './map/map.component';
   ]
 })
 export class AddingModule { }
+
