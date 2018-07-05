@@ -21,32 +21,16 @@
       [markerDraggable]="m.draggable"
       (dragEnd)="markerDragEnd(m, $event)">
       
-    <agm-info-window>
-      <!-- <strong>{{description[i]['text']}}</strong> -->
-      <!-- <input class="agm-info-window-input" [placeholder]="description[i]['text']"> -->
-
-      <!-- <div class="agm-info_text" contenteditable="true">{{description[i]['text']}}</div> -->
-
+    <agm-info-window (click)="clickInfo()">
       <div class="agm-info_text" contenteditable="true" placeholder="Nice place" (blur)="editInfoText($event, i)">{{markers[i]['text']}}</div>
-      
-      <!-- <img *ngIf="imgShow[i]"> -->
-
-      <div class="agm-info_img" *ngIf="markers[i]['imgShow']" [ngStyle]="{'background-image':'url(' + markers[i]['imgPath'] + ')'}"> 
-      </div>
-
-      <!-- <button class="agm-info_button" (click)="saveDescrChanges($event ,i)"><i class="fa fa-save"></i></button> -->
-      
-      <label for="file-upload" class="custom-file-upload">
+      <div class="agm-info_img" *ngIf="markers[i]['imgShow']" [ngStyle]="{'background-image':'url(' + markers[i]['imgPath'] + ')'}"> </div>
+      <label [for]="markers[i]['id']" class="custom-file-upload">
         <i class="fa fa-plus"></i> img
       </label>
-      <input id="file-upload" type="file" (change)="readURL($event, i)"/>
-
+      <input [id]="markers[i]['id']" type="file" (change)="readURL($event, i)"/>
       <button class="agm-info_button" (click)="deleteImg(i)"><i class="fa fa-minus"></i> img</button>
-
-      
-      <button class="agm-info_button" (click)="deleteDescr(i)"><i class="fa fa-trash"></i></button>
+      <button class="agm-info_button" (click)="deleteMarker(i)"><i class="fa fa-trash"></i></button>
     </agm-info-window>
-    
   </agm-marker>
   
   <!-- <agm-circle [latitude]="lat" [longitude]="lng" 
