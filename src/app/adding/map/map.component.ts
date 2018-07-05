@@ -12,18 +12,11 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
   zoom: number = 12;
-  
   // initial center position for the map
   lat: number = 44.04607127363113;
   lng: number = 12.605696990932529;
-
-  description: Array<any> = [];
   markers: marker[] = [];
-
-  imgShow: Array<any> = [];
 
   clickedMarker(marker: string, index: number) {
     console.log(marker);
@@ -35,33 +28,44 @@ export class MapComponent implements OnInit {
     this.markers.push({
       lat: $event.coords.lat,
       lng: $event.coords.lng,
-      // label: 'A',
+      text: 'Nice place',
+      imgShow: false,
       draggable: false,
     });
-    this.description.push({
-      'text': 'smth',
-    })
   }
   
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
 
-  addImg(i) {
-    this.imgShow[i] = true;
+  deleteImg(i) {
+    this.markers[i]['imgShow'] = false;
+    console.log(this.markers);
   }
 
-  saveDescrChanges(event, i) {
-    let descrCurrent = document.getElementsByClassName("agm-info-window-text")[0].innerHTML;
-    this.description[i]['text'] = descrCurrent;
-    console.log(this.description[i]['text']);
-    console.log('i = ' + i);
+  editInfoText(event, i) {
+    console.log(i);
+    console.log(event);
+    console.log(event.srcElement.innerText);
+    this.markers[i]['text'] = event.srcElement.innerText;
+    console.log(this.markers);
   }
+
+  readURL(event, i){
+    console.log(event);
+    // this.markers[i]['imgShow'] = true;
+    // var getImagePath = URL.createObjectURL(event.target.files[0]);
+    // this.markers[i]['imgPath'] = getImagePath;
+    // console.log(getImagePath);
+    console.log(i);
+    // console.log(this.markers);
+   }
 
   deleteDescr(i) {
-    this.description.splice(i, 1);
     this.markers.splice(i, 1);
   }
+
+
   
   
   // markers: marker[] = [
@@ -90,6 +94,9 @@ export class MapComponent implements OnInit {
 interface marker {
 	lat: number;
 	lng: number;
-	label?: string;
+  label?: string;
+  text?: string;
+  imgShow?: boolean;
+  imgPath?: any;
 	draggable: boolean;
 }
