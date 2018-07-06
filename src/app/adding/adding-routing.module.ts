@@ -43,6 +43,14 @@ const routes: Routes = [
         path: 'map',
         component: MapComponent,
       },
+      {
+        path: 'calendar',
+        loadChildren: './../surprise/surprise.module#SurpriseModule',
+      },
+      {
+        path: 'dynamic',
+        loadChildren: './../dynamic/dynamic.module#DynamicModule',
+      },
     ]
   }
 ];
