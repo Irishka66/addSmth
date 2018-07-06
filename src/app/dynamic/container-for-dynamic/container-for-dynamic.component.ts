@@ -44,7 +44,7 @@ export class ContainerForDynamicComponent implements OnInit {
     this.container.clear(); 
   }
 
-  ngOnDestroy() {
-    this.componentRef.destroy();    
-  }
+  // ngOnDestroy() {
+  //   this.componentRef.destroy();    
+  // }
 }
