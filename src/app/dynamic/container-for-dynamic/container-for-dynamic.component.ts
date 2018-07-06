@@ -22,6 +22,9 @@ export class ContainerForDynamicComponent implements OnInit {
   @ViewChild("alertContainer", { read: ViewContainerRef }) container;
   componentRef: ComponentRef<any>;
 
+  success: string = 'our success';
+  anotherSuccess: string = 'another success';
+
   constructor(private resolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
@@ -36,6 +39,11 @@ export class ContainerForDynamicComponent implements OnInit {
     this.componentRef.instance.count = count;
     // this.componentRef.instance.output.subscribe(event => console.log(event));
   }
+
+  deleteComponent() {
+    this.container.clear(); 
+  }
+
   ngOnDestroy() {
     this.componentRef.destroy();    
   }

@@ -1,7 +1,10 @@
-<p>
-  container-for-dynamic works!
-</p>
-
-<template #alertContainer></template>
-<button (click)="createComponent('success', 23)">Create success alert</button>
-<button (click)="createComponent('danger', 111)">Create danger alert</button>
+<div class="container-for-dynamic">
+  <p>
+    container-for-dynamic works!
+  </p>
+  
+  <template #alertContainer></template>
+  <button class="btn btn-secondary" (click)="createComponent(success, 23)">Create success alert</button>
+  <button class="btn btn-secondary" (click)="createComponent(anotherSuccess, 111)">Create another success alert</button>
+  <button class="btn btn-secondary" (click)="deleteComponent()">Delete dynamic component</button>
+</div>
