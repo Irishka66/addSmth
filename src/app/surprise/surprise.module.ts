@@ -11,6 +11,8 @@ import { CalendarModule } from 'angular-calendar';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
+
 
 @NgModule({
   imports: [
@@ -20,7 +22,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
     NgbModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot(),
-    SurpriseRoutingModule
+    SurpriseRoutingModule,
+    NguiDatetimePickerModule
   ],
   declarations: [CalendarComponent],
 })

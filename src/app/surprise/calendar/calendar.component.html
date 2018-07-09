@@ -3,7 +3,7 @@
 </p>
 
 
-<!-- <ng-template #modalContent let-close="close">
+<ng-template #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Event action occurred</h5>
     <button type="button" class="close" (click)="close()">
@@ -155,7 +155,8 @@
           (change)="refresh.next()">
       </td>
       <td>
-        <input
+        <!-- <input
+          (click)="inputStartClick()"
           class="form-control"
           type="text"
           mwlFlatpickr
@@ -166,10 +167,21 @@
           [enableTime]="true"
           dateFormat="Y-m-dTH:i"
           altFormat="F j, Y H:i"
-          placeholder="Not set">
+          placeholder="Not set"> -->
+
+          <input
+            (click)="inputStartClick()"
+            class="form-control"
+            type="text"
+            ngui-datetime-picker
+            [(ngModel)]="event.start"
+            (ngModelChange)="refresh.next()"
+            [close-on-select]="false"
+            placeholder="Not set">
       </td>
-      <td>
-        <input
+      <td>        
+        <!-- <input
+          (click)="inputEndClick()"
           class="form-control"
           type="text"
           mwlFlatpickr
@@ -180,7 +192,17 @@
           [enableTime]="true"
           dateFormat="Y-m-dTH:i"
           altFormat="F j, Y H:i"
-          placeholder="Not set">
+          placeholder="Not set"> -->
+
+          <input
+            (click)="inputEndClick()"
+            class="form-control"
+            type="text"
+            ngui-datetime-picker
+            [(ngModel)]="event.end"
+            (ngModelChange)="refresh.next()"
+            [close-on-select]="false"
+            placeholder="Not set">
       </td>
       <td>
         <button
@@ -192,4 +214,4 @@
     </tr>
   </tbody>
 
-</table> -->
+</table>

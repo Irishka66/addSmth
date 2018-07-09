@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 import {
   startOfDay,
   endOfDay,
@@ -16,6 +16,7 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
+import {CalendarService} from '../../services/calendar.service';
 
 const colors: any = {
   red: {
@@ -29,6 +30,10 @@ const colors: any = {
   yellow: {
     primary: '#e3bc08',
     secondary: '#FDF1BA'
+  },
+  green: {
+    primary: '#008000',
+    secondary: '#90EE90'
   }
 };
 
@@ -87,13 +92,14 @@ export class CalendarComponent implements OnInit {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
       title: 'A long event that spans 2 months',
-      color: colors.blue
+      color: colors.blue,
+      actions: this.actions,
     },
     {
       start: addHours(startOfDay(new Date()), 2),
       end: new Date(),
       title: 'A draggable and resizable event',
-      color: colors.yellow,
+      color: colors.green,
       actions: this.actions,
       resizable: {
         beforeStart: true,
@@ -105,8 +111,19 @@ export class CalendarComponent implements OnInit {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) { }
-  ngOnInit() { }
+  constructor(private modal: NgbModal, private calendarService: CalendarService) { }
+  ngOnInit() { 
+    console.log('on init');
+    if (JSON.parse(localStorage.getItem('events')) !== null) {
+      console.log('events not null');
+      this.events = JSON.parse(localStorage.getItem('events'));
+      console.log(this.events);
+    }
+  }
+
+  // startOfDayString (dirtyDate): String {
+  //   return dirtyDate;
+  // }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -151,6 +168,36 @@ export class CalendarComponent implements OnInit {
       }
     });
     this.refresh.next();
+    // this.saveLocalEvents();
+  }
+
+
+  inputStartClick() {
+    // debugger;
+  }
+
+  inputEndClick() {
+    // debugger;
+  }
+
+  ngOnDestroy() {
+    // this.calendarService.events = this.events;
+    console.log('on destroy');
+    console.log(this.events);
+    // console.log(this.events[0]['start'].toString());
+    // this.calendarService.saveLocalEvents();
+    this.saveLocalEvents();
+  }
+
+  saveLocalEvents() {
+    for (let i = 0; i < this.events.length; i++) {
+      this.events[i]['start'] = this.events[i]['start'].toString();
+      this.events[i]['end'] = this.events[i]['end'].toString();
+    }
+    let localEvents = JSON.stringify(this.events);
+    console.log('local events');
+    console.log(localEvents);
+    localStorage.setItem('events', localEvents);
   }
 
 }
