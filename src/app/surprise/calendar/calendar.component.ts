@@ -111,7 +111,11 @@ export class CalendarComponent implements OnInit {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private calendarService: CalendarService) { }
+  constructor(private modal: NgbModal, private calendarService: CalendarService) { 
+    window.onunload = () => {
+      this.saveLocalEvents();
+    }
+  }
   ngOnInit() { 
     console.log('on init');
     if (JSON.parse(localStorage.getItem('events')) !== null) {
@@ -168,7 +172,6 @@ export class CalendarComponent implements OnInit {
       }
     });
     this.refresh.next();
-    // this.saveLocalEvents();
   }
 
 
@@ -199,6 +202,10 @@ export class CalendarComponent implements OnInit {
     console.log(localEvents);
     localStorage.setItem('events', localEvents);
   }
+
+  // window.onunload = () => {
+  //   this.saveLocalEvents();
+  // }
 
 }
 
